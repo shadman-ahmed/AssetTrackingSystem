@@ -247,7 +247,9 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS -->
-                            <h2>Content</h2>
+
+                                @RenderBody()
+                        
                             <!-- PAGE CONTENT ENDS -->
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -279,7 +281,7 @@
     <script src="~/assets/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+			if('ontouchstart' in document.documentElement) document.write("<script src='~/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
     </script>
     <script src="~/assets/js/bootstrap.min.js"></script>
 
