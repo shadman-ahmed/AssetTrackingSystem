@@ -38,7 +38,7 @@
                                             </div>
                                             <div class="col-md-8">
                                                 @Html.TextBoxFor(model => model.Name, null, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.Name)
+                                                @Html.ValidationMessageFor(model => model.Name, null, new { @class="text-danger"})
                                             </div>
                                         </div>
                                     </div>
@@ -50,7 +50,7 @@
                                             </div>
                                             <div class="col-md-8">
                                                 @Html.TextBoxFor(model => model.ShortName, null, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.ShortName)
+                                                @Html.ValidationMessageFor(model => model.ShortName, null, new { @class="text-danger"})
                                             </div>
                                         </div>
                                     </div>
