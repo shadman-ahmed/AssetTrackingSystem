@@ -12,12 +12,16 @@ namespace AssetTrackingSystem_v2.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            PartialMenu();
+
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(Branch branch)
         {
+            PartialMenu();
+
             return View();
         }
 
