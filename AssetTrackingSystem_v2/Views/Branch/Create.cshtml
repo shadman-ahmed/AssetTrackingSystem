@@ -5,5 +5,95 @@
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<h2>Create</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <h2>Create</h2>
+        <hr />
+    </div>
+
+    <div class="row container-fluid">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-2">
+
+            <div class="widget-box">
+                <div class="widget-header">
+                    <h4 class="widget-title">Branch Setup</h4>
+                </div>
+
+                <div class="widget-body">
+                    <div class="widget-main">
+                        <div class="container-fluid">
+
+                            <!-- form start -->
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4" style="text-align: center">
+                                                @Html.LabelFor(model => model.OrganizationId, new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                                @Html.ValidationMessageFor(model => model.OrganizationId, null, new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4" style="text-align: center">
+                                                @Html.LabelFor(model => model.Name, "Name", new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.TextBoxFor(model => model.Name, null, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4" style="text-align: center">
+                                                @Html.LabelFor(model => model.ShortName, "Short Name", new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.TextBoxFor(model => model.ShortName, null, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.ShortName, null, new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <div class="form-group">
+                                        <div class="row" style="text-align: center">
+                                            <input type="submit" value="Save" class="btn btn-success" />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <!-- ./ form end -->
+                        </div>
+
+                    </div>
+                    <!-- widget main -->
+                </div>
+                <!-- widget body -->
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index", "Home")
+</div>
+
 
