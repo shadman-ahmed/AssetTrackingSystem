@@ -310,6 +310,7 @@
     <Content Include="Views\Location\Create.cshtml" />
     <Content Include="Views\GeneralCategory\Create.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Manufacturer\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -319,7 +320,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Manufacturer\" />
     <Folder Include="Views\Model\" />
   </ItemGroup>
   <PropertyGroup>
