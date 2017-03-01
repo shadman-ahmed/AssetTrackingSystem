@@ -279,6 +279,7 @@
     <Compile Include="Models\GeneralCategory.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Manufacturer.cs" />
+    <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
