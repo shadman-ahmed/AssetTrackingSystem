@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AssetTrackingSystem_v2.Models;
 
 namespace AssetTrackingSystem_v2.Controllers
 {
-    public class HomeController : Controller
+    public class LocationController : Controller
     {
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Create()
+        {
+            PartialMenuView();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Location location)
         {
             PartialMenuView();
             return View();
@@ -17,7 +26,8 @@ namespace AssetTrackingSystem_v2.Controllers
         public ActionResult PartialMenuView()
         {
             /* Action is used to load the menu dynamically when traversing from page to page */
-            ViewBag.Menu = "Index";
+            ViewBag.Menu = "Asset Info";
+            ViewBag.SubMenu = "Location";
 
             return PartialView("_PartialMenu");
         }

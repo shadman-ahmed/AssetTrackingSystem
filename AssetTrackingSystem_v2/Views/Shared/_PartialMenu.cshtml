@@ -9,7 +9,7 @@
     </li>
 
     <!-- Organizaiton info menu -->
-    <li class=" @(ViewBag.Menu == "Organization Info" ? "active open" : "#") ">
+    <li class="@(ViewBag.Menu == "Organization Info" ? "active open" : "#")">
         <a href="#" class="dropdown-toggle">
             <i class="menu-icon fa fa-book"></i>
             <span class="menu-text"> Organization Info </span>
@@ -41,8 +41,9 @@
         </ul>
     </li>
     <!-- End of organization info menu -->
-
-    <li class="">
+    
+    <!-- Asset Info Menu -->
+    <li class="@(ViewBag.Menu == "Asset Info" ? "active open" : "#")">
         <a href="#" class="dropdown-toggle">
             <i class="menu-icon fa fa-building-o"></i>
             <span class="menu-text"> Asset Info </span>
@@ -53,8 +54,8 @@
         <b class="arrow"></b>
 
         <ul class="submenu">
-            <li class="">
-                <a href="#">
+            <li class="@(ViewBag.SubMenu == "Location" ? "active" : "#")">
+                <a href="@Url.Action("Create", "Location")">
                     <i class="menu-icon fa fa-caret-right"></i>
                     Location
                 </a>
@@ -62,8 +63,8 @@
                 <b class="arrow"></b>
             </li>
 
-            <li class="">
-                <a href="#">
+            <li class="@(ViewBag.SubMenu == "General Catergory" ? "active" : "#")">
+                <a href="@Url.Action("Create", "GeneralCategory")">
                     <i class="menu-icon fa fa-caret-right"></i>
                     Gernarl Category
                 </a>
@@ -71,8 +72,8 @@
                 <b class="arrow"></b>
             </li>
 
-            <li class="">
-                <a href="#">
+            <li class="@(ViewBag.SubMenu == "Catergory" ? "active" : "#")">
+                <a href="@Url.Action("Create", "Category")">
                     <i class="menu-icon fa fa-caret-right"></i>
                     Category
                 </a>
@@ -80,8 +81,8 @@
                 <b class="arrow"></b>
             </li>
 
-            <li class="">
-                <a href="#">
+            <li class="@(ViewBag.SubMenu == "Manufacturer" ? "active" : "#")">
+                <a href="@Url.Action("Create", "Manufacturer")">
                     <i class="menu-icon fa fa-caret-right"></i>
                     Manufacturer
                 </a>
@@ -89,8 +90,8 @@
                 <b class="arrow"></b>
             </li>
 
-            <li class="">
-                <a href="#">
+            <li class="@(ViewBag.SubMenu == "Model" ? "active" : "#")">
+                <a href="@Url.Action("Create", "Model")">
                     <i class="menu-icon fa fa-caret-right"></i>
                     Model
                 </a>
@@ -100,5 +101,5 @@
 
         </ul>
     </li>
-
+    <!-- End of Asset Info Menu -->
 </ul>

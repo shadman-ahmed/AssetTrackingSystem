@@ -19,5 +19,15 @@ namespace AssetTrackingSystem_v2.Models
         [RegularExpression("^[A-Z0-9\\S]$", ErrorMessage = "Only uppercase letters and numbers are allowed with no empty space")]
         public string ShortName { get; set; }
         public string Code { get; set; }    /* <BranchCode>_<Location ShortName> */
+        public Organization Organization { get; set; }
+
+        [Display(Name = "Organization")]
+        [Required]
+        public int OrganizationId { get; set; }
+        public Branch Branch { get; set; }
+
+        [Display(Name = "Branch")]
+        [Required]
+        public int BranchId { get; set; }
     }
 }

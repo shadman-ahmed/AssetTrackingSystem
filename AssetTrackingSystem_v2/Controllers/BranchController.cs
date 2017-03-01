@@ -12,20 +12,18 @@ namespace AssetTrackingSystem_v2.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            PartialMenu();
-
+            PartialMenuView();
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(Branch branch)
         {
-            PartialMenu();
-
+            PartialMenuView();
             return View();
         }
 
-        public ActionResult PartialMenu()
+        public ActionResult PartialMenuView()
         {
             /* Action is used to load the menu dynamically when traversing from page to page */
             ViewBag.Menu = "Organization Info";
