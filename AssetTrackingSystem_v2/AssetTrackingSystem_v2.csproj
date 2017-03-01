@@ -269,6 +269,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BranchController.cs" />
+    <Compile Include="Controllers\GeneralCategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
@@ -304,6 +305,7 @@
     <Content Include="Views\Shared\_PartialMenu.cshtml" />
     <Content Include="Views\Branch\Create.cshtml" />
     <Content Include="Views\Location\Create.cshtml" />
+    <Content Include="Views\GeneralCategory\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
