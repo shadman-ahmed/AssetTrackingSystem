@@ -7,7 +7,7 @@ using AssetTrackingSystem_v2.Models;
 
 namespace AssetTrackingSystem_v2.Controllers
 {
-    public class GeneralCategoryController : Controller
+    public class CategoryController : Controller
     {
         [HttpGet]
         public ActionResult Create()
@@ -17,7 +17,7 @@ namespace AssetTrackingSystem_v2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(GeneralCategory generalCategory)
+        public ActionResult Create(Category category)
         {
             PartialMenuView();
             return View();
@@ -27,7 +27,7 @@ namespace AssetTrackingSystem_v2.Controllers
         {
             /* Action is used to load the menu dynamically when traversing from page to page */
             ViewBag.Menu = "Asset Info";
-            ViewBag.SubMenu = "General Category";
+            ViewBag.SubMenu = "Category";
 
             return PartialView("_PartialMenu");
         }
