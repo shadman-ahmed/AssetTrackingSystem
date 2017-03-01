@@ -311,6 +311,7 @@
     <Content Include="Views\GeneralCategory\Create.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Manufacturer\Create.cshtml" />
+    <Content Include="Views\Model\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -320,7 +321,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Model\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
