@@ -21,6 +21,7 @@ namespace AssetTrackingSystem_v2.Models
         public string ShortName { get; set; }
         public string Code { get; set; }    /* <GeneralCategory Short Name>_<Category Short Name> */
         public GeneralCategory GeneralCategory { get; set; }
+        public int GeneralCategoryId { get; set; }
 
     }
 }
