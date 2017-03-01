@@ -16,8 +16,7 @@ namespace AssetTrackingSystem_v2.Models
         public string Name { get; set; }
 
         [Required]
-        [StringLength(3, MinimumLength = 3)]
-        [RegularExpression("^[A-Z0-9\\S]$", ErrorMessage = "Only uppercase letters and numbers are allowed with no empty space")]
+        [RegularExpression(@"^[A-Z0-9]{3,3}$", ErrorMessage = " Code must be exactly 3 digits long, alphabetic, capital, with no space in between")]
         public string Code { get; set; }
 
         public string Description { get; set; }
