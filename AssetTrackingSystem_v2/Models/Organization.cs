@@ -24,5 +24,10 @@ namespace AssetTrackingSystem_v2.Models
 
         public List<Branch> Branches;
 
+        public Location Location { get; set; }
+
+        [StringLength(150)]
+        public string Description { get; set; }
+
     }
 }
