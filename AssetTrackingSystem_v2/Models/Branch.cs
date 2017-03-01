@@ -17,7 +17,7 @@ namespace AssetTrackingSystem_v2.Models
         public string Name { get; set; }
 
         [Required]
-        [RegularExpression("^[A-Z]$", ErrorMessage = "Only uppercase letters allowed")]
+        [RegularExpression("^[A-Z\\S]$", ErrorMessage = "Only uppercase letters allowed")]
         public string ShortName { get; set; }
         public string Code { get; set; }    /* <OrganizationShortName>_<BranchShortName> */
         public Organization Organization { get; set; }
