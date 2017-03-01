@@ -61,7 +61,7 @@
                                                 @Html.LabelFor(model => model.Location, new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-8">
-                                                @Html.TextAreaFor(model => model.Location, new { @class = "form-control" })
+                                                @Html.TextAreaFor(model => model.Location, new { @class = "form-control", @style = "resize: none" })
                                                 @Html.ValidationMessageFor(model => model.Location, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
                                                 @Html.LabelFor(model => model.Description, new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-8">
-                                                @Html.TextAreaFor(model => model.Description, 5, 1, new { @class = "form-control" })
+                                                @Html.TextAreaFor(model => model.Description, 5, 1, new { @class = "form-control", @style = "resize: none;" })
                                                 @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
