@@ -16,10 +16,12 @@ namespace AssetTrackingSystem_v2.Models
         public string Name { get; set; }
 
         [Required]
-        [StringLength(3, MinimumLength = 3)]
-        [RegularExpression("^A-Z\\S$", ErrorMessage = "Only uppercase letters allowed with no empty space")]
+        [RegularExpression(@"^[A-Z]{3,3}$", ErrorMessage = "<ul><li>Only uppercase characters are allowed</li><li>Short Name must be 3 character long</li></ul>")]
         public string ShortName { get; set; }
         public string Code { get; set; }    /* <GeneralCategory Short Name>_<Category Short Name> */
+
+        [StringLength(150)]
+        public string Description { get; set; }
         public GeneralCategory GeneralCategory { get; set; }
         public int GeneralCategoryId { get; set; }
 
