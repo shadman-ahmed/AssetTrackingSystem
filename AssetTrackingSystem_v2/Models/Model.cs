@@ -10,6 +10,7 @@ namespace AssetTrackingSystem_v2.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "Model")]
         [Required]
         public string Name { get; set; }
 
