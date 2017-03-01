@@ -17,7 +17,8 @@ namespace AssetTrackingSystem_v2.Models
 
         [Required]
         [StringLength(2, MinimumLength = 2)]
-        [RegularExpression("^[A-Z]$", ErrorMessage = "Only uppercase letters allowed")]
+        [RegularExpression("^A-Z\\S$", ErrorMessage = "Only uppercase letters allowed with no empty space")]
         public string ShortName { get; set; }
+        public List<Category> Categories { get; set; }
     }
 }
