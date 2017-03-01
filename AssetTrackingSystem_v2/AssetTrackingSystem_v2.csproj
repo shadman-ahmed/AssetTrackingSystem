@@ -275,6 +275,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Branch.cs" />
+    <Compile Include="Models\GeneralCategory.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
