@@ -14,5 +14,6 @@ namespace AssetTrackingSystem_v2.Models
         [Required]
         [Index(IsUnique = true)]
         public string Name { get; set; }
+        public List<Model> Models { get; set; }
     }
 }
