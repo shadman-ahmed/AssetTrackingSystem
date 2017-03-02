@@ -172,7 +172,13 @@
     </div><!-- /.main-container -->
     <!-- basic scripts -->
     <!--[if !IE]> -->
-    <script src="~/assets/js/jquery-2.1.4.min.js"></script>
+        
+    <script src="~/assets/js/jquery-2.1.4.min.js"></script>    
+        
+    <!-- Validate js and Unobtrusive js -->
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+        
     <!-- <![endif]-->
     <!--[if IE]>
     <script src="~/assets/js/jquery-1.11.3.min.js"></script>
@@ -188,9 +194,8 @@
     <script src="~/assets/js/ace.min.js"></script>
 
     <!-- inline scripts related to this page -->
-    
-    <!-- Validate js and Unobtrusive js -->
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    @RenderSection("JavaScript", false)
+
 </body>
 </html>

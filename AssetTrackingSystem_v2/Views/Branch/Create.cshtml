@@ -39,11 +39,7 @@
                                                 @Html.LabelFor(model => model.OrganizationId, new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-8">
-                                                <select>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
+                                                @Html.DropDownListFor(model => model.OrganizationId, new SelectList(ViewBag.OrganizationList, "Value", "Text"), new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.OrganizationId, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -67,7 +63,7 @@
                                                 @Html.LabelFor(model => model.ShortName, "Short Name", new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-8">
-                                                @Html.TextBoxFor(model => model.ShortName, null, new { @class = "form-control" })
+                                                @Html.TextBoxFor(model => model.ShortName, "ShortName", new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.ShortName, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -79,7 +75,7 @@
                                                 @Html.LabelFor(model => model.Code, new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-8">
-                                                @Html.TextBoxFor(model => model.Code, null, new { @class = "form-control", @readonly = "readonly" })
+                                                @Html.TextBoxFor(model => model.Code, "Code", new { @class = "form-control", @readonly = "readonly" })
                                                 @Html.ValidationMessageFor(model => model.Code, null, new { @class = "text-danger"})
                                             </div>
                                         </div>
@@ -108,4 +104,26 @@
     @Html.ActionLink("Back to List", "Index", "Home")
 </div>
 
+@section JavaScript
+{
+    <script type="text/javascript">
+
+        $("#OrganizationId, #ShortName").change(function() {
+
+            var organizationId = $("#OrganizationId").val();
+            var branchShortName = $("#ShortName").val();
+
+            jsonData = { id: organizationId, ShortName: branchShortName };
+
+            $.ajax({
+                url: "GetOrganizationsJsonResult",
+                contentType: "application/json",
+                data: jsonData,
+                success: function(organization) {
+                    $("#Code").val(organization[0].ShortName + "_" + branchShortName);
+                }
+            });
+        });
+    </script>
+}
 

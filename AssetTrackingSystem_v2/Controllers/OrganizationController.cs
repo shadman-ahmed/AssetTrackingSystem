@@ -51,7 +51,7 @@ namespace AssetTrackingSystem_v2.Controllers
                         if (NameExist > 0)
                         {
                             organization.Name = null;
-                            ModelState.AddModelError("Name", "Organization name already exits.");
+                            ModelState.AddModelError("Name", "Organization name already exists.");
                         }
 
                         int ShortNameExits = db.Organizations.Where(c => c.ShortName == organization.ShortName).Count();
@@ -59,7 +59,7 @@ namespace AssetTrackingSystem_v2.Controllers
                         if (ShortNameExits > 0)
                         {
                             organization.ShortName = null;
-                            ModelState.AddModelError("ShortName", "Short name already exits");
+                            ModelState.AddModelError("ShortName", "Short name already exists");
                         }
                     }
                 }
