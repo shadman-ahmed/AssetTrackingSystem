@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AssetTrackingSystem_v2.DB;
 using AssetTrackingSystem_v2.Models;
 
 namespace AssetTrackingSystem_v2.Controllers
@@ -19,6 +20,10 @@ namespace AssetTrackingSystem_v2.Controllers
         [HttpPost]
         public ActionResult Create(Organization organization)
         {
+            AssetTrackingManagementDbContext db = new AssetTrackingManagementDbContext();
+            db.Organizations.Add(organization);
+            db.SaveChanges();
+
             PartialMenuView();
             return View();
         }

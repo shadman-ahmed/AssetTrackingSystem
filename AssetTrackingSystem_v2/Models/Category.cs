@@ -12,6 +12,7 @@ namespace AssetTrackingSystem_v2.Models
         public int Id { get; set; }
 
         [Required]
+        [StringLength(150)]
         [Index(IsUnique = true)]
         public string Name { get; set; }
 

@@ -11,9 +11,11 @@ namespace AssetTrackingSystem_v2.Models
         public int Id { get; set; }
 
         [Display(Name = "Model")]
+        [StringLength(150)]
         [Required]
         public string Name { get; set; }
 
+        [StringLength(150)]
         public string Description { get; set; }
 
         public Manufacturer Manufacturer { get; set; }

@@ -55,19 +55,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-4" style="text-align: center">
-                                                @Html.LabelFor(model => model.Location, new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-8">
-                                                @Html.TextAreaFor(model => model.Location, new { @class = "form-control", @style = "resize: none" })
-                                                @Html.ValidationMessageFor(model => model.Location, null, new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    
+                                   
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-4" style="text-align: center">
@@ -79,7 +67,18 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4" style="text-align: center">
+                                                @Html.LabelFor(model => model.Location, new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.TextAreaFor(model => model.Location, 3, 1 , new { @class = "form-control", @style = "resize: none"})
+                                                @Html.ValidationMessageFor(model => model.Location, null, new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <br />
                                     <div class="form-group">
