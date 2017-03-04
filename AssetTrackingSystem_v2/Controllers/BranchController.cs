@@ -102,18 +102,15 @@ namespace AssetTrackingSystem_v2.Controllers
             return organizationDropDownList;
         }
 
-        public JsonResult GetOrganizationsJsonResult(int? id)
+        public JsonResult GetOrganizationById(int id)
         {
             var db = new AssetTrackingManagementDbContext();
 
-            List<Organization> organizationList = new List<Organization>(db.Organizations);
+            Organization organization = null;
 
-            if (id != null)
-            {
-                organizationList = organizationList.Where(c => c.Id == id).ToList();
-            }
+            organization = db.Organizations.Find(id);
 
-            return Json(organizationList, JsonRequestBehavior.AllowGet);
+            return Json(organization, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -108,21 +108,25 @@
 {
     <script type="text/javascript">
 
-        $("#OrganizationId, #ShortName").change(function() {
+        $(document).ready(function() {
+            $('#OrganizationId, #ShortName').change(function () {
+                var Code;
+                var organizationId = $('#OrganizationId').val();
+                var branchShortName = $('#ShortName').val();
 
-            var organizationId = $("#OrganizationId").val();
-            var branchShortName = $("#ShortName").val();
+                var jsonData = { id: organizationId };
+                $.ajax({
+                    url: '/Branch/GetOrganizationById?id=' + organizationId,
+                    contentType: 'application/json',
+                    data: JSON.stringify(jsonData),
+                    success: function(organization) {
+                        Code = organization.ShortName + "_" + branchShortName;
+                        $('#Code').val(Code);
+                    }
 
-            jsonData = { id: organizationId, ShortName: branchShortName };
-
-            $.ajax({
-                url: "GetOrganizationsJsonResult",
-                contentType: "application/json",
-                data: jsonData,
-                success: function(organization) {
-                    $("#Code").val(organization[0].ShortName + "_" + branchShortName);
-                }
+                });
             });
+
         });
     </script>
 }
