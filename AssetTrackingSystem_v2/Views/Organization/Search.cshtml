@@ -1,0 +1,96 @@
+﻿@using AssetTrackingSystem_v2.Models
+@model IEnumerable<AssetTrackingSystem_v2.Models.Organization>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@section CSS {
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+}
+
+<h2>Orgnaization List</h2>
+<hr/>
+<div>
+    <div class="container-fluid">
+        <div style="text-align: right">
+            <a href="@Url.Action("Create", "Organization")"><div class="btn btn-success btn-round"><i class="fa fa-plus"></i> Create Organization</div></a>
+        </div>
+    </div>
+    <br/>
+    <div class="container-fluid">
+            <table id="organizationTable" class="table table-bordered table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Short Name
+                    </th>
+
+                    <th>
+                        Description
+                    </th>
+
+                    <th>
+                        Location
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                
+
+                </tbody>
+            </table>
+    
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", "Home")
+</p>
+
+
+@section JavaScript {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+
+    <!-- Search JS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#organizationTable').DataTable({
+                ajax: {
+                    url: '/Organization/GetAllOrganization',
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data: "Name"
+                    },
+                    {
+                        data: "ShortName"
+                    },
+                    {
+                        data: "Description"
+                    },
+                    {
+                        data: "Location"
+                    },
+                    {
+                        render: function(data, type, organization) {
+                            console.log("here");
+                            return "<i class='btn btn-xs btn-round btn-info fa fa-edit'></i> " +
+                                "<i class='btn btn-xs btn-round btn-danger fa fa-trash'></i>";
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+}

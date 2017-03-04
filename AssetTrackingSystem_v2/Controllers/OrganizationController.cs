@@ -69,6 +69,11 @@ namespace AssetTrackingSystem_v2.Controllers
             return View(organization);
         }
 
+        public ActionResult Search()
+        {
+            return View();
+        }
+
         public ActionResult PartialMenuView()
         {
 
@@ -77,6 +82,15 @@ namespace AssetTrackingSystem_v2.Controllers
             ViewBag.SubMenu = "Organization";
 
             return PartialView("_PartialMenu");
+        }
+
+        public JsonResult GetAllOrganization()
+        {
+            var db = new AssetTrackingManagementDbContext();
+
+            var organizations = db.Organizations.ToList();
+
+            return Json(organizations, JsonRequestBehavior.AllowGet);
         }
     }
 }
