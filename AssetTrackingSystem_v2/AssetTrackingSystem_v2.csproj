@@ -500,24 +500,9 @@
     <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
-    <Compile Include="DB\AssetTrackingManagementDbContext.cs" />
-    <Compile Include="DB\CascadeDeleteAttribute.cs" />
-    <Compile Include="DB\CascadeDeleteAttributeConvention.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703020759039_InitialCreate.cs" />
-    <Compile Include="Migrations\201703020759039_InitialCreate.Designer.cs">
-      <DependentUpon>201703020759039_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Branch.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\GeneralCategory.cs" />
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\Manufacturer.cs" />
-    <Compile Include="Models\Model.cs" />
-    <Compile Include="Models\Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -545,6 +530,8 @@
     <Content Include="Views\Manufacturer\Create.cshtml" />
     <Content Include="Views\Model\Create.cshtml" />
     <Content Include="Views\Organization\Search.cshtml" />
+    <Content Include="Views\Organization\Edit.cshtml" />
+    <Content Include="Views\Organization\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -556,9 +543,14 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703020759039_InitialCreate.resx">
-      <DependentUpon>201703020759039_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\ATS.BLL\ATS.BLL.csproj">
+      <Project>{70d10c32-2bee-45a8-abe2-1a070336cb0a}</Project>
+      <Name>ATS.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATS.Model\ATS.Model.csproj">
+      <Project>{C646FD26-39D3-4A94-935F-915758AB9F2F}</Project>
+      <Name>ATS.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

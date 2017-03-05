@@ -13,7 +13,9 @@
 
     <div class="row container-fluid">
         <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-2">
-
+            <div class="success">
+                
+            </div>
             <div class="widget-box">
                 <div class="widget-header">
                     <h4 class="widget-title">Organization Setup</h4>
@@ -29,61 +31,61 @@
                                 @Html.AntiForgeryToken()
 
                                 <div class="form-horizontal">
-
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-4" style="text-align: center">
-                                                @Html.LabelFor(model => model.Name, "Name", new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-8">
-                                                @Html.TextBoxFor(model => model.Name, null, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.Name, null, new { @class="text-danger"})
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-4" style="text-align: center">
-                                                @Html.LabelFor(model => model.ShortName, "Short Name", new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-8">
-                                                @Html.TextBoxFor(model => model.ShortName, null, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.ShortName, null, new { @class="text-danger"})
-                                            </div>
-                                        </div>
-                                    </div>
                                     
-                                   
+                                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-4" style="text-align: center">
-                                                @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                                                @Html.LabelFor(model => model.Name, "Name", new {@class = "control-label"})
                                             </div>
                                             <div class="col-md-8">
-                                                @Html.TextAreaFor(model => model.Description, 5, 1, new { @class = "form-control", @style = "resize: none;" })
-                                                @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-4" style="text-align: center">
-                                                @Html.LabelFor(model => model.Location, new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-8">
-                                                @Html.TextAreaFor(model => model.Location, 3, 1 , new { @class = "form-control", @style = "resize: none"})
-                                                @Html.ValidationMessageFor(model => model.Location, null, new { @class = "text-danger" })
+                                                @Html.TextBoxFor(model => model.Name, null, new {@class = "form-control"})
+                                                @Html.ValidationMessageFor(model => model.Name, null, new {@class = "text-danger"})
                                             </div>
                                         </div>
                                     </div>
 
-                                    <br />
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4" style="text-align: center">
+                                                @Html.LabelFor(model => model.ShortName, "Short Name", new {@class = "control-label"})
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.TextBoxFor(model => model.ShortName, null, new {@class = "form-control"})
+                                                @Html.ValidationMessageFor(model => model.ShortName, null, new {@class = "text-danger"})
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4" style="text-align: center">
+                                                @Html.LabelFor(model => model.Description, new {@class = "control-label"})
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.TextAreaFor(model => model.Description, 5, 1, new {@class = "form-control", @style = "resize: none;"})
+                                                @Html.ValidationMessageFor(model => model.Description, null, new {@class = "text-danger"})
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4" style="text-align: center">
+                                                @Html.LabelFor(model => model.Location, new {@class = "control-label"})
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.TextAreaFor(model => model.Location, 3, 1, new {@class = "form-control", @style = "resize: none"})
+                                                @Html.ValidationMessageFor(model => model.Location, null, new {@class = "text-danger"})
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br/>
                                     <div class="form-group">
                                         <div class="row" style="text-align: center">
-                                            <input type="submit" value="Save" class="btn btn-success" />
+                                            <input type="submit" value="Save" class="btn btn-success"/>
                                         </div>
                                     </div>
                                 </div>
@@ -100,5 +102,5 @@
     </div>
 </div>
 <div>
-    @Html.ActionLink("Back to List", "Index", "Home")
+    @Html.ActionLink("Back to List", "Search", "Organization")
 </div>

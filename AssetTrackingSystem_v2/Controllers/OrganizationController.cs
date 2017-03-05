@@ -4,67 +4,135 @@ using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AssetTrackingSystem_v2.DB;
 using AssetTrackingSystem_v2.Models;
+using ATS.BLL;
+using ATS.Model.Interfaces.BLL;
 
 namespace AssetTrackingSystem_v2.Controllers
 {
     public class OrganizationController : Controller
     {
+        private IOrganizationManager _manager;
+
+        public OrganizationController()
+        {
+            _manager = new OrganizationManager();
+            PartialMenuView();
+        }
         [HttpGet]
         public ActionResult Create()
         {
-            PartialMenuView();
-            return View(new Organization());
+            //PartialMenuView();
+
+            ModelState.Clear();
+            return View();
         }
 
         [HttpPost]
         public ActionResult Create(Organization organization)
         {
 
-            PartialMenuView();
+            //PartialMenuView();
 
             if (ModelState.IsValid && organization != null)
             {
+                ModelState.Clear();
+
                 try
                 {
-                    var db = new AssetTrackingManagementDbContext();
-
-                    db.Organizations.Add(organization);
-
-                    int successCount = db.SaveChanges();
-
-                    if (successCount > 0)
+                    if (_manager.Add(organization))
                     {
-                        // make partialView for success 
-                        return View(new Organization());
+                        return View();
                     }
                 }
                 catch (Exception exception)
                 {
-                    using (var db = new AssetTrackingManagementDbContext())
-                    {
-                        int NameExist = db.Organizations.Where(c => c.Name.Equals(organization.Name)).Count();
+                    
+                        int NameExist = _manager.GetAll(c => c.Name.Equals(organization.Name)).Count();
 
                         if (NameExist > 0)
                         {
                             organization.Name = null;
-                            ModelState.AddModelError("Name", "Organization name already exists.");
+                            ModelState.AddModelError("Name", "Organization name already exists");
                         }
 
-                        int ShortNameExits = db.Organizations.Where(c => c.ShortName == organization.ShortName).Count();
+                        int ShortNameExits = _manager.GetAll(c => c.ShortName == organization.ShortName).Count();
 
                         if (ShortNameExits > 0)
                         {
                             organization.ShortName = null;
                             ModelState.AddModelError("ShortName", "Short name already exists");
                         }
+                }
+                
+            }
+
+            return View(organization);
+        }
+
+        
+        public ActionResult Delete(int id)
+        {
+            var organization = _manager.GetById(id);
+            _manager.Remove(organization);
+
+            return View("Search");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var organization = _manager.GetById((int) id);
+            return View(organization);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Organization organization)
+        {
+            if (ModelState.IsValid)
+            {
+                ModelState.Clear();
+
+                try
+                {
+                    if (_manager.Update(organization))
+                    {
+                        return View();
                     }
                 }
-               
+                catch (Exception exception)
+                {
+                    int NameExist = _manager.GetAll(c => c.Name == organization.Name).Count();
+
+                    if (NameExist > 0)
+                    {
+                        ModelState.AddModelError("Name", "Name already exists in the system");
+                    }
+
+                    int ShortNameExist = _manager.GetAll(c => c.ShortName == organization.ShortName).Count();
+
+                    if (ShortNameExist > 0)
+                    {
+                        ModelState.AddModelError("ShortName", "Short name already exists in the system");
+                    }
+
+                }
             }
+            return View(organization);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var organization = _manager.GetById(id);
 
             return View(organization);
         }
@@ -73,7 +141,7 @@ namespace AssetTrackingSystem_v2.Controllers
         {
             return View();
         }
-
+        
         public ActionResult PartialMenuView()
         {
 
@@ -86,9 +154,8 @@ namespace AssetTrackingSystem_v2.Controllers
 
         public JsonResult GetAllOrganization()
         {
-            var db = new AssetTrackingManagementDbContext();
-
-            var organizations = db.Organizations.ToList();
+            
+            var organizations = _manager.GetAll(c => true).ToList();
 
             return Json(organizations, JsonRequestBehavior.AllowGet);
         }

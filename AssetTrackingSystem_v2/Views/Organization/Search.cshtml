@@ -10,51 +10,55 @@
     <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
 }
 
-<h2>Orgnaization List</h2>
-<hr/>
+<h2>Search</h2>
 <div>
+    <h4>Organization</h4>
+    <hr />
     <div class="container-fluid">
         <div style="text-align: right">
-            <a href="@Url.Action("Create", "Organization")"><div class="btn btn-success btn-round"><i class="fa fa-plus"></i> Create Organization</div></a>
+            <a href="@Url.Action("Create", "Organization")">
+                <div class="btn btn-success btn-round"><i class="fa fa-plus"></i> Create Organization
+                </div></a>
         </div>
+        
     </div>
     <br/>
+    @{
+        Html.RenderPartial("_OperationPartialView");
+    }
     <div class="container-fluid">
-            <table id="organizationTable" class="table table-bordered table-striped table-responsive">
-                <thead>
-                <tr>
-                    <th>
-                        Name
-                    </th>
+        <table id="organizationTable" class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
 
-                    <th>
-                        Short Name
-                    </th>
+                <th>
+                    Short Name
+                </th>
 
-                    <th>
-                        Description
-                    </th>
+                <th>
+                    Description
+                </th>
 
-                    <th>
-                        Location
-                    </th>
+                <th>
+                    Location
+                </th>
 
-                    <th>
-                        Actions
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
+                <th>
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody>
                 
 
-                </tbody>
-            </table>
+            </tbody>
+        </table>
     
     </div>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index", "Home")
-</p>
 
 
 @section JavaScript {
@@ -84,9 +88,8 @@
                     },
                     {
                         render: function(data, type, organization) {
-                            console.log("here");
-                            return "<i class='btn btn-xs btn-round btn-info fa fa-edit'></i> " +
-                                "<i class='btn btn-xs btn-round btn-danger fa fa-trash'></i>";
+                            return "<a href='/Organization/Edit/" + organization.Id + "'><i class='btn btn-xs btn-round btn-info fa fa-edit'></i></a> " +
+                                "<a href='/Organization/Delete/" + organization.Id + "'><i class='btn btn-xs btn-round btn-danger fa fa-trash'></i></a>";
                         }
                     }
                 ]
