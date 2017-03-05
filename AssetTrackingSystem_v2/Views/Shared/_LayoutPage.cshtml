@@ -109,7 +109,7 @@
 
     <div class="main-container ace-save-state" id="main-container">
         <script type="text/javascript">
-				try{ace.settings.loadState('main-container')}catch(e){}
+            try{ace.settings.loadState('main-container')}catch(e){}
         </script>
 
         <div id="sidebar" class="sidebar responsive ace-save-state">
@@ -129,26 +129,29 @@
 
         <div class="main-content">
             <div class="main-content-inner">
-                @*<div class="breadcrumbs ace-save-state" id="breadcrumbs">
-                    <ul class="breadcrumb">
-                        <li>
-                            <i class="ace-icon fa fa-home home-icon"></i>
-                            <a href="#">Home</a>
-                        </li>
-
-                        <li>
-                            <a href="#">Dashboard</a>
-                        </li>
-                    </ul><!-- /.breadcrumb -->
-                </div>*@
-
+               
                 <div class="page-content">
                     <div class="row">
                         <div class="col-xs-12">
-                            <!-- PAGE CONTENT BEGINS -->
+                            
+                        @if(ViewBag.Msg != null)
+                        {
+                             <!-- Display Message -->
+                            <div class="container-fluid" id="msgDiv">
+                                <div class="col-xs-6 col-xs-offset-3">
+                                    <br />
+                                    <div class="alert alert-info" role="alert">
+                                        @ViewBag.Msg
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Message -->
+                        }
+                           
 
-                                @RenderBody()
-                        
+                            <!-- PAGE CONTENT BEGINS -->
+                            @RenderBody()
+
                             <!-- PAGE CONTENT ENDS -->
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -186,7 +189,7 @@
     <script src="~/assets/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='~/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+        if('ontouchstart' in document.documentElement) document.write("<script src='~/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
     </script>
     <script src="~/assets/js/bootstrap.min.js"></script>
 
@@ -196,8 +199,14 @@
     <script src="~/assets/js/ace.min.js"></script>
 
     <!-- inline scripts related to this page -->
+        
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#msgDiv').fadeOut(3500);
+        });            
+    </script>
 
-    @RenderSection("JavaScript", false)
+        @RenderSection("JavaScript", false)
 
 </body>
 </html>

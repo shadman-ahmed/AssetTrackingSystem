@@ -46,6 +46,7 @@ namespace AssetTrackingSystem_v2.Controllers
                 {
                     if (_manager.Add(organization))
                     {
+                        ViewBag.Msg = "Created successfully!";
                         return View();
                     }
                 }
@@ -78,7 +79,18 @@ namespace AssetTrackingSystem_v2.Controllers
         public ActionResult Delete(int id)
         {
             var organization = _manager.GetById(id);
-            _manager.Remove(organization);
+            try
+            {
+                if (_manager.Remove(organization))
+                {
+                    ViewBag.Msg = "Deleted successfully!";
+                }
+                return View("Search");
+            }
+            catch (Exception exception)
+            {
+                return HttpNotFound(exception.Message);
+            }
 
             return View("Search");
         }
@@ -106,6 +118,7 @@ namespace AssetTrackingSystem_v2.Controllers
                 {
                     if (_manager.Update(organization))
                     {
+                        ViewBag.Msg = "Updated successfully!";
                         return View();
                     }
                 }
