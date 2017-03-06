@@ -5,28 +5,39 @@ using System.Web;
 using System.Web.Mvc;
 using AssetTrackingSystem_v2.DB;
 using AssetTrackingSystem_v2.Models;
+using ATS.BLL;
+using ATS.Model.Interfaces.BLL;
 
 namespace AssetTrackingSystem_v2.Controllers
 {
     public class BranchController : Controller
     {
+        private IBranchManager _branchManager;
+        private IOrganizationManager _organizationManager;
+
+
+        public BranchController()
+        {
+            PartialMenuView();
+            _branchManager = new BranchManager();
+            _organizationManager = new OrganizationManager();
+        }
+
         [HttpGet]
         public ActionResult Create()
         {
-            PartialMenuView();
             ViewBag.OrganizationList = GetOrganizations();
-
-            return View(new Branch());
+            return View();
         }
 
         [HttpPost]
         public ActionResult Create(Branch branch)
         {
-            PartialMenuView();
             ViewBag.OrganizationList = GetOrganizations();
 
             if (ModelState.IsValid && branch != null)
             {
+                ModelState.Clear();
                 try
                 {
                     using (var db = new AssetTrackingManagementDbContext())
@@ -51,8 +62,9 @@ namespace AssetTrackingSystem_v2.Controllers
 
                             if (successCount > 0)
                             {
+                                ModelState.Clear();
                                 //make partial view for success msg
-                                return View(new Branch());
+                                return View();
                             }
                         }
                     }
@@ -72,6 +84,7 @@ namespace AssetTrackingSystem_v2.Controllers
                     }
                 }
             }
+
             return View(branch);
         }
 
@@ -86,29 +99,32 @@ namespace AssetTrackingSystem_v2.Controllers
 
         private List<SelectListItem> GetOrganizations()
         {
-            var db = new AssetTrackingManagementDbContext();
-
-            var organizationList = db.Organizations;
-
             var organizationDropDownList = new List<SelectListItem>();
-            foreach (var organization in organizationList)
-            {
-                var item = new SelectListItem() { Text = organization.Name, Value = organization.Id.ToString() };
-                organizationDropDownList.Add(item);
-            }
-
             organizationDropDownList.Insert(0, new SelectListItem() { Text = "Select Organization", Value = string.Empty });
 
+            try
+            {
+                var organizationList = _organizationManager.GetAll(c => true);
+
+                foreach (var organization in organizationList)
+                {
+                    var item = new SelectListItem() {Text = organization.Name, Value = organization.Id.ToString()};
+                    organizationDropDownList.Add(item);
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            
             return organizationDropDownList;
         }
 
         public JsonResult GetOrganizationById(int id)
         {
-            var db = new AssetTrackingManagementDbContext();
-
             Organization organization = null;
 
-            organization = db.Organizations.Find(id);
+            organization = _organizationManager.GetById(id);
 
             return Json(organization, JsonRequestBehavior.AllowGet);
         }
