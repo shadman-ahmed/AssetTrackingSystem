@@ -13,12 +13,12 @@ namespace ATS.DAL.Base
     {
         protected DbContext _db;
 
-        public BaseRepository(DbContext db)
+        protected BaseRepository(DbContext db)
         {
             _db = db;
         }
 
-        public DbSet<T> Table
+        private DbSet<T> Table
         {
             get { return _db.Set<T>(); }
         }

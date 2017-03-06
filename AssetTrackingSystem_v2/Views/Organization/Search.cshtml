@@ -44,7 +44,7 @@
                     Location
                 </th>
 
-                <th>
+                <th colspan="2">
                     Actions
                 </th>
             </tr>
@@ -65,7 +65,7 @@
 
     <!-- Search JS -->
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#organizationTable').DataTable({
                 ajax: {
                     url: '/Organization/GetAllOrganization',
@@ -86,10 +86,14 @@
                     },
                     {
                         render: function(data, type, organization) {
-                            return "<a href='/Organization/Edit/" + organization.Id + "'><i class='btn btn-xs btn-round btn-info fa fa-edit'></i></a> " +
-                                "<a href='/Organization/Delete/" + organization.Id + "'><i class='btn btn-xs btn-round btn-danger fa fa-trash'></i></a>";
+                            return "<div style='text-align: center'>" +
+                                    "<a href='/Organization/Details/" + organization.Id + "'><i class='btn btn-xs btn-round btn-success fa fa-file'></i></a> " +
+                                    "<a href='/Organization/Edit/" + organization.Id + "'><i class='btn btn-xs btn-round btn-info fa fa-edit'></i></a> " +
+                                    "<a href='/Organization/Delete/" + organization.Id + "'><i class='btn btn-xs btn-round btn-danger fa fa-trash'></i></a>" +
+                                "</div>";
                         }
                     }
+
                 ]
             });
         });

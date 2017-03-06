@@ -75,7 +75,6 @@ namespace AssetTrackingSystem_v2.Controllers
             return View(organization);
         }
 
-        
         public ActionResult Delete(int id)
         {
             var organization = _manager.GetById(id);
@@ -84,12 +83,15 @@ namespace AssetTrackingSystem_v2.Controllers
                 if (_manager.Remove(organization))
                 {
                     ViewBag.Msg = "Deleted successfully!";
+
+                    return View("Search");
                 }
-                return View("Search");
             }
             catch (Exception exception)
             {
-                return HttpNotFound(exception.Message);
+                //return HttpNotFound();
+                ViewBag.Msg = exception.GetType().ToString();
+
             }
 
             return View("Search");
@@ -112,7 +114,7 @@ namespace AssetTrackingSystem_v2.Controllers
         {
             if (ModelState.IsValid)
             {
-                ModelState.Clear();
+                //ModelState.Clear();
 
                 try
                 {
