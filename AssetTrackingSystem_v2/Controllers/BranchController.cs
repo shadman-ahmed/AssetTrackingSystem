@@ -122,6 +122,31 @@ namespace AssetTrackingSystem_v2.Controllers
             return View(branchList);
         }
 
+        public ActionResult Delete(int id)
+        {
+            var branch = _branchManager.GetById(id);
+            try
+            {
+                if (_branchManager.Remove(branch))
+                {
+                    ViewBag.Msg = "Branch deleted Successfully";
+                }
+            }
+            catch (Exception exception)
+            {
+                ViewBag.Msg = exception.GetType().ToString();
+            }
+
+            return View("Search");
+        }
+
+        public ActionResult Details(int id)
+        {
+            var branch = _branchManager.GetById(id);
+            
+            return View(branch);
+        }
+
         private ActionResult PartialMenuView()
         {
             /* Action is used to load the menu dynamically when traversing from page to page */
