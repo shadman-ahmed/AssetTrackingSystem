@@ -40,48 +40,76 @@ namespace AssetTrackingSystem_v2.Controllers
                 ModelState.Clear();
                 try
                 {
-                    using (var db = new AssetTrackingManagementDbContext())
+                   var BranchList = _branchManager.GetAll(c => true);
+
+                    int BranchExist = BranchList
+                                        .Where(c => c.OrganizationId == branch.OrganizationId)
+                                        .Where(c => c.ShortName == branch.ShortName)
+                                        .Count();
+
+                    if (BranchExist > 0)
                     {
-                        var BranchList = new List<Branch>(db.Branches);
-
-                        int BranchExist = BranchList
-                                            .Where(c => c.OrganizationId == branch.OrganizationId)
-                                            .Where(c => c.ShortName == branch.ShortName)
-                                            .Count();
-
-                        if (BranchExist > 0)
+                        branch.ShortName = null;
+                        ModelState.AddModelError("ShortName",
+                            "Short name for the branch already exists for the organization");
+                    }
+                    else
+                    {
+                        if(_branchManager.Add(branch))
                         {
-                            branch.ShortName = null;
-                            ModelState.AddModelError("ShortName",
-                                "Short name for the branch already exists for the organization");
+                            ViewBag.Msg = "Branch added successfully!";
+                            return View();
                         }
-                        else
-                        {
-                            db.Branches.Add(branch);
-                            int successCount = db.SaveChanges();
+                    }
+                    
+                }
+                catch (Exception exception)
+                {
+                   Console.WriteLine(exception.Message);
+                }
+            }
 
-                            if (successCount > 0)
-                            {
-                                ModelState.Clear();
-                                //make partial view for success msg
-                                return View();
-                            }
+            return View(branch);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            ViewBag.OrganizationList = GetOrganizations();
+            var branch = _branchManager.GetById(id);
+
+            return View(branch);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Branch branch)
+        {
+            ViewBag.OrganizationList = GetOrganizations();
+
+            if (ModelState.IsValid && branch != null)
+            {
+                try
+                {
+                    var branchList = _branchManager.GetAll(c => c.OrganizationId == branch.OrganizationId);
+
+                    int branchNameExist = branchList.Where(c => c.ShortName == branch.ShortName).Count();
+
+                    if (branchNameExist > 0)
+                    {
+                        ModelState.AddModelError("ShortName",
+                            "Short name already exist for a branch of the organization");
+                    }
+                    else
+                    {
+                        if (_branchManager.Update(branch))
+                        {
+                            ViewBag.Msg = "Branch info updated succesfully";
                         }
                     }
                 }
                 catch (Exception exception)
                 {
-                    using (var db = new AssetTrackingManagementDbContext())
-                    {
-                        int BranchNameExist = db.Branches.Where(c => c.Name == branch.Name).Count();
-
-                        if (BranchNameExist > 0)
-                        {
-                            branch.Name = null;
-                            ModelState.AddModelError("Name", "Branch name already exists");
-                        }
-                        
-                    }
+                    
                 }
             }
 
@@ -108,7 +136,7 @@ namespace AssetTrackingSystem_v2.Controllers
 
                 foreach (var organization in organizationList)
                 {
-                    var item = new SelectListItem() {Text = organization.Name, Value = organization.Id.ToString()};
+                    var item = new SelectListItem() { Text = organization.Name, Value = organization.Id.ToString() };
                     organizationDropDownList.Add(item);
                 }
             }
@@ -120,11 +148,14 @@ namespace AssetTrackingSystem_v2.Controllers
             return organizationDropDownList;
         }
 
-        public JsonResult GetOrganizationById(int id)
+        public JsonResult GetOrganizationById(int? id)
         {
             Organization organization = null;
 
-            organization = _organizationManager.GetById(id);
+            if (id != null)
+            {
+                organization = _organizationManager.GetById((int) id);
+            }
 
             return Json(organization, JsonRequestBehavior.AllowGet);
         }
