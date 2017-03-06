@@ -1,0 +1,85 @@
+﻿@model IEnumerable<AssetTrackingSystem_v2.Models.Branch>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@section CSS {
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+}
+
+<h2>Search</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Branch")"><span class="btn btn-success"><i class="fa fa-plus"></i> Create New</span></a>
+</p>
+<table class="table" id="branchTable">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationId)
+        </th>
+
+        <th>
+            Branch @Html.DisplayNameFor(model => model.Name)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.ShortName)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+
+        <th></th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    
+    </tbody>
+
+</table>
+
+@section JavaScript {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+
+    <!-- Search JS -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#branchTable').DataTable({
+                ajax: {
+                    url: '/Branch/GetAllBranches',
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data: "Organization"
+                    },
+                    {
+                        data: "Branch.Name"
+                    },
+                    {
+                        data: "Branch.ShortName"
+                    },
+                    {
+                        data: "Branch.Code"
+                    },
+                    {
+                        render: function (data, type, object) {
+                            console.log(object.Branch.Id);
+                            return "<div style='text-align: center'>" +
+                                    "<a href='/Branch/Details/" + object.Branch.Id + "'><i class='btn btn-xs btn-round btn-success fa fa-file'></i></a> " +
+                                    "<a href='/Branch/Edit/" + object.Branch.Id + "'><i class='btn btn-xs btn-round btn-info fa fa-edit'></i></a> " +
+                                    "<a href='/Branch/Delete/" + object.Branch.Id + "'><i class='btn btn-xs btn-round btn-danger fa fa-trash'></i></a>" +
+                                "</div>";
+                        }
+                    }]
+            });
+        });
+
+    </script>
+}

@@ -116,6 +116,12 @@ namespace AssetTrackingSystem_v2.Controllers
             return View(branch);
         }
 
+        public ActionResult Search()
+        {
+            var branchList = _branchManager.GetAll(c => true);
+            return View(branchList);
+        }
+
         private ActionResult PartialMenuView()
         {
             /* Action is used to load the menu dynamically when traversing from page to page */
@@ -125,7 +131,7 @@ namespace AssetTrackingSystem_v2.Controllers
             return PartialView("_PartialMenu");
         }
 
-        private List<SelectListItem> GetOrganizations()
+        public List<SelectListItem> GetOrganizations()
         {
             var organizationDropDownList = new List<SelectListItem>();
             organizationDropDownList.Insert(0, new SelectListItem() { Text = "Select Organization", Value = string.Empty });
@@ -158,6 +164,21 @@ namespace AssetTrackingSystem_v2.Controllers
             }
 
             return Json(organization, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetAllBranches()
+        {
+            var branchList = _branchManager.GetAll(c => true);
+            var organizationList = _organizationManager.GetAll(c => true);
+
+            var orgBranchList = branchList.Join(organizationList, branch => branch.OrganizationId, org => org.Id,
+                (branch, org) => new
+                {
+                    Organization = org.Name,
+                    Branch = branch
+                });
+
+            return Json(orgBranchList, JsonRequestBehavior.AllowGet);
         }
     }
 }
