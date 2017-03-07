@@ -11,11 +11,11 @@ namespace AssetTrackingSystem_v2.Controllers
 {
     public class LocationController : Controller
     {
-        private ILocationManager _manager;
+        //private ILocationManager _manager;
 
         public LocationController()
         {
-            _manager = new LocationManager();
+            //_manager = new LocationManager();
             PartialMenuView();
         }
         [HttpGet]
