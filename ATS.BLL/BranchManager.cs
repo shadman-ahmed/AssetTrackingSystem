@@ -17,7 +17,7 @@ namespace ATS.BLL
 
         public BranchManager()
         {
-            _repository = new BranchRepository();;
+            _repository = new BranchRepository();
         }
         public bool Add(Branch entity)
         {
@@ -31,6 +31,12 @@ namespace ATS.BLL
 
         public bool Update(Branch entity)
         {
+            int shortNameExist = _repository.GetAll(c => c.Id != entity.Id && c.ShortName == entity.ShortName).Count();
+
+            if (shortNameExist > 0)
+            {
+                return false;
+            }
             return _repository.Update(entity);
         }
 

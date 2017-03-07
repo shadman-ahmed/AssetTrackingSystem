@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -14,10 +15,12 @@ namespace ATS.BLL
     public class OrganizationManager : IOrganizationManager
     {
         private IOrganizationRepository _repository;
+        private IBranchManager _branchManager;
 
         public OrganizationManager()
         {
             _repository = new OrganizationRepository();
+            _branchManager = new BranchManager();
         }
         public bool Add(Organization entity)
         {
@@ -26,6 +29,16 @@ namespace ATS.BLL
 
         public bool Remove(Organization entity)
         {
+            /* Removin associated branches of the organization */
+            var branchList = _branchManager.GetAll(c => c.OrganizationId == entity.Id);
+
+            if (branchList.Count > 0)
+            {
+                foreach (var branch in branchList)
+                {
+                    _branchManager.Remove(branch);
+                }
+            }
             return _repository.Remove(entity);
         }
 

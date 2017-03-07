@@ -90,20 +90,15 @@ namespace AssetTrackingSystem_v2.Controllers
             {
                 try
                 {
-                    var branchList = _branchManager.GetAll(c => c.OrganizationId == branch.OrganizationId);
-
-                    int branchNameExist = branchList.Where(c => c.ShortName == branch.ShortName).Count();
-
-                    if (branchNameExist > 0)
+                    if (_branchManager.Update(branch))
                     {
-                        ModelState.AddModelError("ShortName",
-                            "Short name already exist for a branch of the organization");
+                        ViewBag.Msg = "Branch info updated successfully!";
                     }
                     else
                     {
-                        if (_branchManager.Update(branch))
+                        if (_branchManager.GetAll(c => c.Id != branch.Id && c.ShortName == branch.ShortName).Count() > 0)
                         {
-                            ViewBag.Msg = "Branch info updated succesfully";
+                            ModelState.AddModelError("ShortName", "ShortName for a branch already exist for the organization");
                         }
                     }
                 }
