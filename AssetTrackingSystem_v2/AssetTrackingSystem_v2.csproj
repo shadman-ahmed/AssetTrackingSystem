@@ -538,6 +538,7 @@
     <Content Include="Views\Branch\Edit.cshtml" />
     <Content Include="Views\Branch\Search.cshtml" />
     <Content Include="Views\Branch\Details.cshtml" />
+    <Content Include="Views\Employee\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -547,7 +548,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Employee\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ATS.BLL\ATS.BLL.csproj">

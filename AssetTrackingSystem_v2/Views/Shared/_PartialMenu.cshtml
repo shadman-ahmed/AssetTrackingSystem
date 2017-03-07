@@ -38,6 +38,14 @@
                 <b class="arrow"></b>
             </li>
 
+            <li class="@(ViewBag.SubMenu == "Employee" ? "active" : "#")">
+                <a href="@Url.Action("Search", "Employee")">
+                    <i class="menu-icon fa fa-caret-right"></i>
+                    Organization
+                </a>
+
+                <b class="arrow"></b>
+            </li>
         </ul>
     </li>
     <!-- End of organization info menu -->
