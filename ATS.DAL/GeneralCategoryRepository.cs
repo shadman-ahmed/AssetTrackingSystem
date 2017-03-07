@@ -11,7 +11,7 @@ using AssetTrackingSystem_v2.DB;
 
 namespace ATS.DAL
 {
-    class GeneralCategoryRepository : BaseRepository<GeneralCategory>, IGeneralCategoryRepository, IDisposable
+    public class GeneralCategoryRepository : BaseRepository<GeneralCategory>, IGeneralCategoryRepository, IDisposable
     {
         public AssetTrackingManagementDbContext Context
         {

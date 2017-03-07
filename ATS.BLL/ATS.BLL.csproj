@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BranchManager.cs" />
+    <Compile Include="GeneralCategoryManager.cs" />
     <Compile Include="OrganizationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
