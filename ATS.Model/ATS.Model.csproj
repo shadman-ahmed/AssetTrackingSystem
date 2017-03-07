@@ -69,6 +69,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\GeneralCategory.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Manufacturer.cs" />
