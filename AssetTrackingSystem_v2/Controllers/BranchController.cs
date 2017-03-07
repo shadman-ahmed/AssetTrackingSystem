@@ -104,7 +104,7 @@ namespace AssetTrackingSystem_v2.Controllers
                 }
                 catch (Exception exception)
                 {
-                    
+                    ViewBag.Msg = exception.GetType().ToString();
                 }
             }
 
