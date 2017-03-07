@@ -12,6 +12,7 @@ namespace AssetTrackingSystem_v2.DB
     {
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Branch> Branches { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<GeneralCategory> GeneralCategories { get; set; }
         public DbSet<Category> Categories { get; set; }
