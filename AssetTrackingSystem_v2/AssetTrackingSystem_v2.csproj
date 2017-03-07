@@ -539,6 +539,7 @@
     <Content Include="Views\Branch\Details.cshtml" />
     <Content Include="Views\GeneralCategory\Edit.cshtml" />
     <Content Include="Views\GeneralCategory\Details.cshtml" />
+    <Content Include="Views\GeneralCategory\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
