@@ -4,22 +4,29 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AssetTrackingSystem_v2.Models;
+using ATS.BLL;
+using ATS.Model.Interfaces.BLL;
 
 namespace AssetTrackingSystem_v2.Controllers
 {
     public class LocationController : Controller
     {
+        private ILocationManager _manager;
+
+        public LocationController()
+        {
+            _manager = new LocationManager();
+            PartialMenuView();
+        }
         [HttpGet]
         public ActionResult Create()
         {
-            PartialMenuView();
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(Location location)
         {
-            PartialMenuView();
             return View();
         }
 

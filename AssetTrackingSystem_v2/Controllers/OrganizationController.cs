@@ -174,5 +174,6 @@ namespace AssetTrackingSystem_v2.Controllers
 
             return Json(organizations, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

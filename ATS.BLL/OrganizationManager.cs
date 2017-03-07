@@ -43,5 +43,6 @@ namespace ATS.BLL
         {
             return _repository.GetAll(predicateExpression);
         }
+
     }
 }

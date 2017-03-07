@@ -38,11 +38,7 @@
                                                 @Html.LabelFor(model => model.OrganizationId, new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-8">
-                                                <select>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
+                                                @Html.DropDownListFor(model => model.OrganizationId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.OrganizationId, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -54,11 +50,7 @@
                                                 @Html.LabelFor(model => model.BranchId, new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-8">
-                                                <select>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
+                                                @Html.DropDownListFor(model => model.BranchId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.BranchId, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -111,4 +103,52 @@
     @Html.ActionLink("Back to List", "Index", "Home")
 </div>
 
+@section JavaScript {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /* Load DropDownList for organization */
+            $.ajax({
+                url: '/Organization/GetAllOrganization',
+                contentType: 'application/json',
+                success: function (data) {
+
+                    var defaultOption = "<option value=''>Select Organization</option>";
+                    $('#OrganizationId').append(defaultOption);
+                    
+                    $.each(data, function(i) {
+                        var options = "<option value='" + data[i].Id + "'>" + data[i].Name + "</option>";
+
+                        $('#OrganizationId').append(options);
+                    });
+                }
+            });
+
+            /* Load DropDownList for Branches */
+            $.ajax({
+                url: '/Branch/GetAllBranches',
+                contentType: 'application/json',
+                success: function (data) {
+                    var defaultOption = "<option value=''>Select Branch</option>";
+                    $('#BranchId').append(defaultOption);
+
+                    $.each(data, function (i) {
+                        var options = "<option value='" + data[i].Branch.Id + "'>" + data[i].Branch.Name + "</option>";
+
+                        $('#BranchId').append(options);
+                    });
+                }
+            });
+
+
+            /* Automatically select organization/branch upon selection of one another */
+            $('#OrganizationId, #BranchId').change(function() {
+                var organizaionId = $('#OrganizationId').val();
+                var branchId = $('#BranchId').val();
+
+
+            });
+        });
+    </script>
+}
 
