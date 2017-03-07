@@ -1,0 +1,97 @@
+﻿@using AssetTrackingSystem_v2.Models
+@model IEnumerable<AssetTrackingSystem_v2.Models.Manufacturer>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@section CSS {
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+}
+
+<h2>Search</h2>
+
+<div>
+    <h4>Manufacturer</h4>
+    <hr />
+    <div class="container-fluid">
+        <div style="text-align: right">
+            <a href="@Url.Action("Create", "Manufacturer")">
+                <div class="btn btn-success btn-round">
+                    <i class="fa fa-plus"></i> Create Manufacturer
+                </div>
+            </a>
+        </div>
+
+    </div>
+    <br />
+
+    <div class="container-fluid">
+        <table id="manufacturerTable" class="table table-bordered table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Code
+                    </th>
+
+                    <th>
+                        Description
+                    </th>
+
+
+                    <th colspan="2">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    </div>
+</div>
+
+
+@section JavaScript {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+
+    <!-- Search JS -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#manufacturerTable').DataTable({
+                ajax: {
+                    url: '/Manufacturer/GetAllManufacturer',
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data: "Name"
+                    },
+                    {
+                        data: "Code"
+                    },
+                    {
+                        data: "Description"
+                    },
+                   
+                    {
+                        render: function (data, type, manufacturer) {
+
+                            return "<div style='text-align: center'>" +
+                                    "<a href='/Manufacturer/Details/" + manufacturer.Id + "'><i class='btn btn-xs btn-round btn-success fa fa-file'></i></a> " +
+                                    "<a href='/Manufacturer/Edit/" + manufacturer.Id + "'><i class='btn btn-xs btn-round btn-info fa fa-edit'></i></a> " +
+                                    "<a href='/Manufacturer/Delete/" + manufacturer.Id + "'><i class='btn btn-xs btn-round btn-danger fa fa-trash'></i></a>" +
+                                "</div>";
+                        }
+                    }
+
+                ]
+            });
+        });
+    </script>
+ }

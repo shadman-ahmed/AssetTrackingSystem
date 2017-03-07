@@ -53,11 +53,13 @@
     <Compile Include="DB\CascadeDeleteAttribute.cs" />
     <Compile Include="DB\CascadeDeleteAttributeConvention.cs" />
     <Compile Include="Interfaces\BLL\IBranchManager.cs" />
-    <Compile Include="Interfaces\BLL\ILocationManager.cs" />
+    <Compile Include="Interfaces\BLL\IGeneralCategoryManager.cs" />
     <Compile Include="Interfaces\BLL\IManager.cs" />
+    <Compile Include="Interfaces\BLL\IManufacturerManager.cs" />
     <Compile Include="Interfaces\BLL\IOrganizationManager.cs" />
     <Compile Include="Interfaces\DAL\IBranchRepository.cs" />
-    <Compile Include="Interfaces\DAL\ILocationRepository.cs" />
+    <Compile Include="Interfaces\DAL\IGeneralCategoryRepository.cs" />
+    <Compile Include="Interfaces\DAL\IManufacturerRepository.cs" />
     <Compile Include="Interfaces\DAL\IOrganizationRepository.cs" />
     <Compile Include="Interfaces\DAL\IRepository.cs" />
     <Compile Include="Migrations\201703020759039_InitialCreate.cs" />

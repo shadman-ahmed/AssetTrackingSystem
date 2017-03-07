@@ -51,7 +51,8 @@
   <ItemGroup>
     <Compile Include="Base\BaseRepository.cs" />
     <Compile Include="BranchRepository.cs" />
-    <Compile Include="LocationRepository.cs" />
+    <Compile Include="GeneralCategoryRepository.cs" />
+    <Compile Include="ManufacturerRepository.cs" />
     <Compile Include="OrganizationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

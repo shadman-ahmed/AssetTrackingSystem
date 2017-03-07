@@ -1,0 +1,95 @@
+﻿@using AssetTrackingSystem_v2.Models
+@model IEnumerable<AssetTrackingSystem_v2.Models.GeneralCategory>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@section CSS {
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+}
+
+<h2>Search</h2>
+<div>
+    <h4>General Category</h4>
+    <hr />
+    <div class="container-fluid">
+        <div style="text-align: right">
+            <a href="@Url.Action("Create", "GeneralCategory")">
+                <div class="btn btn-success btn-round">
+                    <i class="fa fa-plus"></i> Create General Category
+                </div>
+            </a>
+        </div>
+
+    </div>
+    <br />
+
+    <div class="container-fluid">
+        <table id="GeneralCategoryTable" class="table table-bordered table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Short Name
+                    </th>
+
+                    <th>
+                        Description
+                    </th>
+
+                    <th colspan="2">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    </div>
+</div>
+
+
+@section JavaScript {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+
+    <!-- Search JS -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#GeneralCategoryTable').DataTable({
+                ajax: {
+                    url: '/GeneralCategory/GetAllGeneralCategory',
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data: "Name"
+                    },
+                    {
+                        data: "ShortName"
+                    },
+                    {
+                        data: "Description"
+                    },
+
+                    {
+                        render: function (data, type, generalCategory) {
+
+                            return "<div style='text-align: center'>" +
+                                    "<a href='/GeneralCategory/Details/" + generalCategory.Id + "'><i class='btn btn-xs btn-round btn-success fa fa-file'></i></a> " +
+                                    "<a href='/generalCategory/Edit/" + generalCategory.Id + "'><i class='btn btn-xs btn-round btn-info fa fa-edit'></i></a> " +
+                                    "<a href='/generalCategory/Delete/" + generalCategory.Id + "'><i class='btn btn-xs btn-round btn-danger fa fa-trash'></i></a>" +
+                                "</div>";
+                        }
+                    }
+
+                ]
+            });
+        });
+    </script>
+}
