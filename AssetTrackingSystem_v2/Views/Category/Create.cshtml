@@ -38,12 +38,8 @@
                                                 @Html.LabelFor(model => model.GeneralCategoryId, new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-8">
-                                                <select>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
-                                                @Html.ValidationMessageFor(model => model.GeneralCategoryId, null, new { @class = "text-danger" })
+                                                @Html.DropDownListFor(model => model.OrganizationId, new SelectList(ViewBag.OrganizationList, "Value", "Text"), new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.OrganizationId, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
@@ -71,6 +67,18 @@
                                         </div>
                                     </div>
                                     
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4" style="text-align: center">
+                                                @Html.LabelFor(model => model.Code, new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.TextBoxFor(model => model.Code, "Code", new { @class = "form-control", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.Code, null, new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-4" style="text-align: center">
@@ -103,6 +111,6 @@
     </div>
 </div>
 <div>
-    @Html.ActionLink("Back to List", "Index", "Home")
+    @Html.ActionLink("Back to List", "Search", "Category")
 </div>
 
