@@ -159,12 +159,12 @@ namespace AssetTrackingSystem_v2.Controllers
             return PartialView("_PartialMenu");
         }
 
-        public JsonResult GetAllgeneralCategory()
+        public JsonResult GetAllGeneralCategory()
         {
 
-            var generalCategorys = _generalCategoryManager.GetAll(c => true).ToList();
+            var generalCategories = _generalCategoryManager.GetAll(c => true).ToList();
 
-            return Json(generalCategorys, JsonRequestBehavior.AllowGet);
+            return Json(generalCategories, JsonRequestBehavior.AllowGet);
         }
     }
 }
