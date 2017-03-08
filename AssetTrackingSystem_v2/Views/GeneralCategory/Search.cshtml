@@ -27,7 +27,7 @@
     <br />
 
     <div class="container-fluid">
-        <table id="GeneralCategoryTable" class="table table-bordered table-striped table-responsive">
+        <table id="generalCategoryTable" class="table table-bordered table-striped table-responsive">
             <thead>
                 <tr>
                     <th>
@@ -61,7 +61,7 @@
     <!-- Search JS -->
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#GeneralCategoryTable').DataTable({
+            $('#generalCategoryTable').DataTable({
                 ajax: {
                     url: '/GeneralCategory/GetAllGeneralCategory',
                     dataSrc: ''
@@ -82,8 +82,8 @@
 
                             return "<div style='text-align: center'>" +
                                     "<a href='/GeneralCategory/Details/" + generalCategory.Id + "'><i class='btn btn-xs btn-round btn-success fa fa-file'></i></a> " +
-                                    "<a href='/generalCategory/Edit/" + generalCategory.Id + "'><i class='btn btn-xs btn-round btn-info fa fa-edit'></i></a> " +
-                                    "<a href='/generalCategory/Delete/" + generalCategory.Id + "'><i class='btn btn-xs btn-round btn-danger fa fa-trash'></i></a>" +
+                                    "<a href='/GeneralCategory/Edit/" + generalCategory.Id + "'><i class='btn btn-xs btn-round btn-info fa fa-edit'></i></a> " +
+                                    "<a href='/GeneralCategory/Delete/" + generalCategory.Id + "'><i class='btn btn-xs btn-round btn-danger fa fa-trash'></i></a>" +
                                 "</div>";
                         }
                     }
