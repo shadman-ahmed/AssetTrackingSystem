@@ -184,19 +184,19 @@ namespace AssetTrackingSystem_v2.Controllers
             return Json(generalCategory, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetAllcategories()
+        public JsonResult GetAllCategories()
         {
             var categoryList = _categoryManager.GetAll(c => true);
             var generalCategoryList = _generalCategoryManager.GetAll(c => true);
 
-            var orgcategoryList = categoryList.Join(generalCategoryList, category => category.GeneralCategoryId, org => org.Id,
-                (category, org) => new
+            var subCategoryList = categoryList.Join(generalCategoryList, category => category.GeneralCategoryId, gnrl => gnrl.Id,
+                (category, gnrl) => new
                 {
-                    generalCategory = org.Name,
-                    category = category
+                    GeneralCategory = gnrl.Name,
+                    Category = category
                 });
 
-            return Json(orgcategoryList, JsonRequestBehavior.AllowGet);
+            return Json(subCategoryList, JsonRequestBehavior.AllowGet);
         }
         
     }

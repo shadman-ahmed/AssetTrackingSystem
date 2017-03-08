@@ -24,6 +24,8 @@ namespace AssetTrackingSystem_v2.Models
         [StringLength(150)]
         public string Description { get; set; }
         public GeneralCategory GeneralCategory { get; set; }
+
+        [Display(Name = "General Category")]
         public int GeneralCategoryId { get; set; }
 
     }
