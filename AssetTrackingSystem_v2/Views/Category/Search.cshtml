@@ -1,0 +1,84 @@
+﻿@model IEnumerable<AssetTrackingSystem_v2.Models.Category>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@section CSS {
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+}
+
+<h2>Search</h2>
+
+
+<p>
+    <a href="@Url.Action("Create", "Category")"><span class="btn btn-success"><i class="fa fa-plus"></i> Create New</span></a>
+</p>
+<table class="table table-bordered table-striped" id="categoryTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GeneralCategoryId)
+            </th>
+
+            <th>
+                Category @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ShortName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody></tbody>
+
+</table>
+
+@section JavaScript {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+
+    <!-- Search JS -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#categoryTable').DataTable({
+                ajax: {
+                    url: '/Category/GetAllcategories',
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data: "GeneralCategory"
+                    },
+                    {
+                        data: "Category.Name"
+                    },
+                    {
+                        data: "Category.ShortName"
+                    },
+                    {
+                        data: "Category.Code"
+                    },
+                    {
+                        render: function (data, type, object) {
+                            console.log(object.Category.Id);
+                            return "<div style='text-align: center'>" +
+                                    "<a href='/Category/Details/" + object.Category.Id + "'><i class='btn btn-xs btn-round btn-success fa fa-file'></i></a> " +
+                                    "<a href='/Category/Edit/" + object.Category.Id + "'><i class='btn btn-xs btn-round btn-info fa fa-edit'></i></a> " +
+                                    "<a href='/Category/Delete/" + object.Category.Id + "'><i class='btn btn-xs btn-round btn-danger fa fa-trash'></i></a>" +
+                                "</div>";
+                        }
+                    }]
+            });
+        });
+
+    </script>
+}

@@ -184,7 +184,7 @@ namespace AssetTrackingSystem_v2.Controllers
             return Json(generalCategory, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetAllcategoryes()
+        public JsonResult GetAllcategories()
         {
             var categoryList = _categoryManager.GetAll(c => true);
             var generalCategoryList = _generalCategoryManager.GetAll(c => true);
