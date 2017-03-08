@@ -543,6 +543,7 @@
     <Content Include="Views\Manufacturer\Edit.cshtml" />
     <Content Include="Views\Manufacturer\Details.cshtml" />
     <Content Include="Views\Manufacturer\Search.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
