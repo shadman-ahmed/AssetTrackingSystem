@@ -38,8 +38,8 @@
                                                 @Html.LabelFor(model => model.GeneralCategoryId, new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-8">
-                                                @Html.DropDownListFor(model => model.OrganizationId, new SelectList(ViewBag.OrganizationList, "Value", "Text"), new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.OrganizationId, null, new { @class = "text-danger" })
+                                                @Html.DropDownListFor(model => model.GeneralCategoryId, new SelectList(ViewBag.GeneralCategoryList, "Value", "Text"), new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.GeneralCategoryId, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
