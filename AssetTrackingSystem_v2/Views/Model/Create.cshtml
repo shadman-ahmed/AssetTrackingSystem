@@ -39,11 +39,7 @@
                                                 @Html.LabelFor(model => model.ManufacuturerId, new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-8">
-                                                <select>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
+                                                @Html.DropDownListFor(model => model.ManufacuturerId, new SelectList(ViewBag.ManufacturerList, "Value", "Text"), new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.ManufacuturerId, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -55,11 +51,8 @@
                                                 @Html.LabelFor(model => model.CategoryId, new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-8">
-                                                <select>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
+                                                @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.CategoryList, "Value", "Text"), new { @class = "form-control" })
+
                                                 @Html.ValidationMessageFor(model => model.CategoryId, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -89,7 +82,7 @@
                                         </div>
                                     </div>
 
-                                    
+
 
                                     <br />
                                     <div class="form-group">
@@ -111,7 +104,7 @@
     </div>
 </div>
 <div>
-    @Html.ActionLink("Back to List", "Index", "Home")
+    @Html.ActionLink("Back to List", "Search", "Model")
 </div>
 
 

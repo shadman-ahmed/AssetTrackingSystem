@@ -10,7 +10,7 @@ using System.Web.Mvc;
 using AssetTrackingSystem_v2.DB;
 using AssetTrackingSystem_v2.Models;
 using ATS.BLL;
-using ATS.Model.Interfaces.BLL;
+using ATS.Models.Interfaces.BLL;
 
 namespace AssetTrackingSystem_v2.Controllers
 {

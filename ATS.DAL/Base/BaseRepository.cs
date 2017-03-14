@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using ATS.Model.Interfaces;
+using ATS.Models.Interfaces;
 
 namespace ATS.DAL.Base
 {

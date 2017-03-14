@@ -58,12 +58,14 @@
     <Compile Include="Interfaces\BLL\ILocationManager.cs" />
     <Compile Include="Interfaces\BLL\IManager.cs" />
     <Compile Include="Interfaces\BLL\IManufacturerManager.cs" />
+    <Compile Include="Interfaces\BLL\IModelManager.cs" />
     <Compile Include="Interfaces\BLL\IOrganizationManager.cs" />
     <Compile Include="Interfaces\DAL\IBranchRepository.cs" />
     <Compile Include="Interfaces\DAL\ICategoryRepository.cs" />
     <Compile Include="Interfaces\DAL\IGeneralCategoryRepository.cs" />
     <Compile Include="Interfaces\DAL\ILocationRepository.cs" />
     <Compile Include="Interfaces\DAL\IManufacturerRepository.cs" />
+    <Compile Include="Interfaces\DAL\IModelRepository.cs" />
     <Compile Include="Interfaces\DAL\IOrganizationRepository.cs" />
     <Compile Include="Interfaces\DAL\IRepository.cs" />
     <Compile Include="Migrations\201703020759039_InitialCreate.cs" />

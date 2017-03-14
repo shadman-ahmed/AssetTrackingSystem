@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATS.Model.Interfaces.BLL
+namespace ATS.Models.Interfaces.BLL
 {
     public interface IManager<T> where T : class 
     {

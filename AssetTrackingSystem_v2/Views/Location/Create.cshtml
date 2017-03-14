@@ -80,6 +80,18 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4" style="text-align: center">
+                                                @Html.LabelFor(model => model.Code, new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.TextBoxFor(model => model.Code, "Code", new { @class = "form-control", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.Code, null, new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <br />
                                     <div class="form-group">
                                         <div class="row" style="text-align: center">
@@ -100,10 +112,13 @@
     </div>
 </div>
 <div>
-    @Html.ActionLink("Back to List", "Index", "Home")
+    @Html.ActionLink("Back to List", "Search", "Location")
 </div>
 
 @section JavaScript {
+
+    <script src="~/Scripts/AssetTracking/Location_Code.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -115,40 +130,42 @@
 
                     var defaultOption = "<option value=''>Select Organization</option>";
                     $('#OrganizationId').append(defaultOption);
-                    
-                    $.each(data, function(i) {
-                        var options = "<option value='" + data[i].Id + "'>" + data[i].Name + "</option>";
+
+                    $.each(data, function (key, organization) {
+                        var options = "<option value='" + organization.Id + "'>" + organization.Name + "</option>";
 
                         $('#OrganizationId').append(options);
                     });
                 }
             });
 
-            /* Load DropDownList for Branches */
-            $.ajax({
-                url: '/Branch/GetAllBranches',
-                contentType: 'application/json',
-                success: function (data) {
-                    var defaultOption = "<option value=''>Select Branch</option>";
-                    $('#BranchId').append(defaultOption);
+            /* Load DropDownList for Branches from organization*/
 
-                    $.each(data, function (i) {
-                        var options = "<option value='" + data[i].Branch.Id + "'>" + data[i].Branch.Name + "</option>";
+            $("#OrganizationId").change(function () {
+                var organizationId = $("#OrganizationId").val();
+                var jsonData = { id: organizationId };
+                $("#BranchId").empty();
+                var defaultDropDownValue = '<option value="">Select Branch</option>';
+                $('#BranchId').append(defaultDropDownValue);
+                $.ajax({
+                    type: "POST",
+                    url: "/Location/GetBranchesByOrganization",
+                    contentType: "application/json",
+                    data: JSON.stringify(jsonData),
+                    success: function (branchList) {
+                        $.each(branchList, function (key, location) {
+                            var option = "<option value=" + location.Id + ">" + location.Name + "</option>";
+                            $("#BranchId").append(option);
+                        });
+                    }
 
-                        $('#BranchId').append(options);
-                    });
-                }
+                });
             });
 
-
-            /* Automatically select organization/branch upon selection of one another */
-            $('#OrganizationId, #BranchId').change(function() {
-                var organizaionId = $('#OrganizationId').val();
-                var branchId = $('#BranchId').val();
-
-
-            });
+           
         });
+
+
     </script>
 }
 

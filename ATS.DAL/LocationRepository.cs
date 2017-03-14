@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AssetTrackingSystem_v2.DB;
 using AssetTrackingSystem_v2.Models;
 using ATS.DAL.Base;
-using ATS.Model.Interfaces.DAL;
+using ATS.Models.Interfaces.DAL;
 
 namespace ATS.DAL
 {

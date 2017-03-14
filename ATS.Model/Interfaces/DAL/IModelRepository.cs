@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ATS.Models.Interfaces.DAL
 {
-    public interface ICategoryRepository : IRepository<Category>
+    public interface IModelRepository : IRepository<Model>
     {
     }
 }

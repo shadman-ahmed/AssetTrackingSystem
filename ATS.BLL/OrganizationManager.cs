@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AssetTrackingSystem_v2.Models;
 using ATS.DAL;
-using ATS.Model.Interfaces;
-using ATS.Model.Interfaces.BLL;
+using ATS.Models.Interfaces;
+using ATS.Models.Interfaces.BLL;
 
 namespace ATS.BLL
 {

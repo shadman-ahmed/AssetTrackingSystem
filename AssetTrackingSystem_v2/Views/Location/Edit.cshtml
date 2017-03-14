@@ -1,0 +1,70 @@
+﻿@model AssetTrackingSystem_v2.Models.Location
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>Edit</h2>
+
+<hr />
+<div class="form-horizontal col-md-6 col-md-offset-3">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OrganizationId, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.DropDownListFor(model => model.OrganizationId, new SelectList(ViewBag.OrganizationList, "Value", "Text"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.OrganizationId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BranchId, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.DropDownListFor(model => model.BranchId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.ShortName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+           @Html.TextBoxFor(model => model.Code, "Code", new { @class = "form-control", @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model.Code, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+
+
+<br />
+<div class="col-md-12">
+    @Html.ActionLink("Back to List", "Search", "Location")
+</div>
+
+@section JavaScript {
+   
+<script src="~/Scripts/AssetTracking/Location_Code.js"></script>
+}

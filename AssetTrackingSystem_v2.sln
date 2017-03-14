@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetTrackingSystem_v2", "AssetTrackingSystem_v2\AssetTrackingSystem_v2.csproj", "{C8D591A2-6C4D-48C4-A681-0C9EE6F733D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.Model", "ATS.Model\ATS.Model.csproj", "{C646FD26-39D3-4A94-935F-915758AB9F2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.Models", "ATS.Model\ATS.Models.csproj", "{C646FD26-39D3-4A94-935F-915758AB9F2F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS.BLL", "ATS.BLL\ATS.BLL.csproj", "{70D10C32-2BEE-45A8-ABE2-1A070336CB0A}"
 EndProject

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATS.Model.Interfaces
+namespace ATS.Models.Interfaces
 {
     public interface IRepository<T> where T : class
     {

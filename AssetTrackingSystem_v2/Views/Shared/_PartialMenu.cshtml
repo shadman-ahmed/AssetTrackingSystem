@@ -55,7 +55,7 @@
 
         <ul class="submenu">
             <li class="@(ViewBag.SubMenu == "Location" ? "active" : "#")">
-                <a href="@Url.Action("Create", "Location")">
+                <a href="@Url.Action("Search", "Location")">
                     <i class="menu-icon fa fa-caret-right"></i>
                     Location
                 </a>
@@ -91,7 +91,7 @@
             </li>
 
             <li class="@(ViewBag.SubMenu == "Model" ? "active" : "#")">
-                <a href="@Url.Action("Create", "Model")">
+                <a href="@Url.Action("Search", "Model")">
                     <i class="menu-icon fa fa-caret-right"></i>
                     Model
                 </a>

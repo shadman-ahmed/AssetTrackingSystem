@@ -12,10 +12,12 @@ namespace AssetTrackingSystem_v2.Models
 
         public int Id { get; set; }
 
+        [Display(Name = "Branch")]
         [Required]
         [StringLength(150)]
         public string Name { get; set; }
 
+        [Display(Name = "Short Name")]
         [Required]
         [RegularExpression("^[A-Z]*$", ErrorMessage = "Only uppercase letters allowed with no empty space")]
         public string ShortName { get; set; }

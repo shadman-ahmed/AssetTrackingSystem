@@ -11,10 +11,12 @@ namespace AssetTrackingSystem_v2.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "General Category")]
         [Required]
         [StringLength(150)]
         public string Name { get; set; }
 
+        [Display(Name = "Short Name")]
         [Required]
         [StringLength(150)]
         [Index(IsUnique = true)]

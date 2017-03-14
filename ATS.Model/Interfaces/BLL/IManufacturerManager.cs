@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATS.Model.Interfaces.BLL
+namespace ATS.Models.Interfaces.BLL
 {
     public interface IManufacturerManager : IManager<Manufacturer>
     {

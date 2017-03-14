@@ -1,6 +1,6 @@
 ﻿using AssetTrackingSystem_v2.Models;
 using ATS.BLL;
-using ATS.Model.Interfaces.BLL;
+using ATS.Models.Interfaces.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;

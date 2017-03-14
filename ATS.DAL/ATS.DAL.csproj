@@ -55,13 +55,14 @@
     <Compile Include="GeneralCategoryRepository.cs" />
     <Compile Include="LocationRepository.cs" />
     <Compile Include="ManufacturerRepository.cs" />
+    <Compile Include="ModelRepository.cs" />
     <Compile Include="OrganizationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ATS.Model\ATS.Model.csproj">
+    <ProjectReference Include="..\ATS.Model\ATS.Models.csproj">
       <Project>{c646fd26-39d3-4a94-935f-915758ab9f2f}</Project>
-      <Name>ATS.Model</Name>
+      <Name>ATS.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AssetTrackingSystem_v2.Models;
-using ATS.Model.Interfaces.BLL;
+using ATS.Models.Interfaces.BLL;
 using ATS.BLL;
 
 namespace AssetTrackingSystem_v2.Controllers

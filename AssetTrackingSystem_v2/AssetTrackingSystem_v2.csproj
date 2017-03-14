@@ -406,6 +406,7 @@
     <None Include="Scripts\jquery-1.8.0.intellisense.js" />
     <Content Include="Scripts\AssetTracking\Branch_Code.js" />
     <Content Include="Scripts\AssetTracking\Category_Code.js" />
+    <Content Include="Scripts\AssetTracking\Location_Code.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
@@ -547,6 +548,12 @@
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Category\Search.cshtml" />
     <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Model\Edit.cshtml" />
+    <Content Include="Views\Model\Details.cshtml" />
+    <Content Include="Views\Model\Search.cshtml" />
+    <Content Include="Views\Location\Edit.cshtml" />
+    <Content Include="Views\Location\Search.cshtml" />
+    <Content Include="Views\Location\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -562,9 +569,9 @@
       <Project>{70d10c32-2bee-45a8-abe2-1a070336cb0a}</Project>
       <Name>ATS.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ATS.Model\ATS.Model.csproj">
+    <ProjectReference Include="..\ATS.Model\ATS.Models.csproj">
       <Project>{C646FD26-39D3-4A94-935F-915758AB9F2F}</Project>
-      <Name>ATS.Model</Name>
+      <Name>ATS.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

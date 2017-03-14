@@ -10,7 +10,8 @@ namespace AssetTrackingSystem_v2.Models
     public class Manufacturer
     {
         public int Id { get; set; }
-        
+
+        [Display(Name = "Manufacturer")]
         [Required]
         [StringLength(150)]
         [Index(IsUnique = true)]

@@ -11,11 +11,13 @@ namespace AssetTrackingSystem_v2.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "Category")]
         [Required]
         [StringLength(150)]
         [Index(IsUnique = true)]
         public string Name { get; set; }
 
+        [Display(Name = "Short Name")]
         [Required]
         [RegularExpression(@"^[A-Z]{3,3}$", ErrorMessage = "<ul><li>Only uppercase characters are allowed</li><li>Short Name must be 3 character long</li></ul>")]
         public string ShortName { get; set; }

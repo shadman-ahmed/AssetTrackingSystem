@@ -16,6 +16,7 @@ namespace AssetTrackingSystem_v2.Models
         [StringLength(100)]
         public string Name { get; set; }
 
+        [Display(Name = "Short Name")]
         [Required]
         [Index(IsUnique = true)]
         [StringLength(50)]

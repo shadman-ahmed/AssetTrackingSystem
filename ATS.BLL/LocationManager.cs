@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AssetTrackingSystem_v2.Models;
 using ATS.DAL;
-using ATS.Model.Interfaces.BLL;
-using ATS.Model.Interfaces.DAL;
+using ATS.Models.Interfaces.BLL;
+using ATS.Models.Interfaces.DAL;
 
 namespace ATS.BLL
 {
@@ -21,27 +21,34 @@ namespace ATS.BLL
         }
         public bool Add(Location entity)
         {
-            throw new NotImplementedException();
+            return _repository.Add(entity);
         }
 
         public bool Remove(Location entity)
         {
-            throw new NotImplementedException();
+            return _repository.Remove(entity);
         }
 
         public bool Update(Location entity)
         {
-            throw new NotImplementedException();
+            int shortNameExist = _repository.GetAll(c => c.Id != entity.Id && c.ShortName == entity.ShortName).Count();
+
+            if (shortNameExist > 0)
+            {
+                return false;
+            }
+            return _repository.Update(entity);
         }
 
         public Location GetById(int id)
         {
-            throw new NotImplementedException();
+
+            return _repository.GetById(id);
         }
 
         public ICollection<Location> GetAll(Expression<Func<Location, bool>> predicateExpression)
         {
-            throw new NotImplementedException();
+            return _repository.GetAll(predicateExpression);
         }
     }
 }

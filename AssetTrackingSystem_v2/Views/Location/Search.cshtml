@@ -1,0 +1,110 @@
+﻿@model IEnumerable<AssetTrackingSystem_v2.Models.Location>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@section CSS {
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+}
+
+<h2>Search</h2>
+
+
+<h4>Location</h4>
+<hr />
+<div class="container-fluid">
+    <div style="text-align: right">
+        <a href="@Url.Action("Create", "Location")">
+            <div class="btn btn-success btn-round">
+                <i class="fa fa-plus"></i> Create Location
+            </div>
+        </a>
+    </div>
+
+</div>
+<br />
+
+
+<table id="modelTable" class="table table-bordered table-striped table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizationId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.BranchId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ShortName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+
+
+
+
+@section JavaScript {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+
+    <!-- Search JS -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#modelTable').DataTable({
+                ajax: {
+                    url: '/Location/GetAllLocations',
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data: "Organization"
+                    },
+                    {
+                        data: "Branch"
+                    },
+                    {
+                        data: "Name"
+                    },
+                    {
+                        data: "ShortName"
+                    },
+                    {
+                        data: "Code"
+                    },
+                    {
+                        render: function (data, type, object) {
+
+                            console.log(object.Location.Id);
+
+                            return "<div style='text-align: center'>" +
+                                    "<a href='/Location/Details/" + object.Location.Id + "'><i class='btn btn-xs btn-round btn-success fa fa-file'></i></a> " +
+                                    "<a href='/Location/Edit/" + object.Location.Id + "'><i class='btn btn-xs btn-round btn-info fa fa-edit'></i></a> " +
+                                    "<a href='/Location/Delete/" + object.Location.Id + "'><i class='btn btn-xs btn-round btn-danger fa fa-trash'></i></a>" +
+                                "</div>";
+                        }
+                    }
+
+                ]
+            });
+        });
+    </script>
+}

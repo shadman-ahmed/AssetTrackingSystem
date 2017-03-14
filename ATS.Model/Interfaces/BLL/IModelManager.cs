@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATS.Models.Interfaces.DAL
+namespace ATS.Models.Interfaces.BLL
 {
-    public interface ICategoryRepository : IRepository<Category>
+    public interface IModelManager : IManager<Model>
     {
     }
 }

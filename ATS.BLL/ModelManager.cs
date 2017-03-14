@@ -6,44 +6,52 @@ using System.Text;
 using System.Threading.Tasks;
 using AssetTrackingSystem_v2.Models;
 using System.Linq.Expressions;
-using ATS.DAL;
 using ATS.Models.Interfaces.DAL;
+using ATS.DAL;
 
 namespace ATS.BLL
 {
-    public class GeneralCategoryManager : IGeneralCategoryManager
+    public class ModelManager : IModelManager
     {
 
-        private IGeneralCategoryRepository _repository;
 
-        public GeneralCategoryManager()
+        private IModelRepository _repository;
+
+        public ModelManager()
         {
-            _repository = new GeneralCategoryRepository();
+            _repository = new ModelRepository();
         }
 
-        public bool Add(GeneralCategory entity)
+        public bool Add(Model entity)
         {
             return _repository.Add(entity);
         }
 
-        public ICollection<GeneralCategory> GetAll(Expression<Func<GeneralCategory, bool>> predicateExpression)
+        public ICollection<Model> GetAll(Expression<Func<Model, bool>> predicateExpression)
         {
             return _repository.GetAll(predicateExpression);
         }
 
-        public GeneralCategory GetById(int id)
+        public Model GetById(int id)
         {
             return _repository.GetById(id);
         }
 
-        public bool Remove(GeneralCategory entity)
+        public bool Remove(Model entity)
         {
             return _repository.Remove(entity);
         }
 
-        public bool Update(GeneralCategory entity)
+        public bool Update(Model entity)
         {
+            int shortNameExist = _repository.GetAll(c => c.Id != entity.Id && c.Name == entity.Name).Count();
+
+            if (shortNameExist > 0)
+            {
+                return false;
+            }
             return _repository.Update(entity);
         }
+
     }
 }

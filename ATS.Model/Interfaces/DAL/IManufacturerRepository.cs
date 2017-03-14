@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATS.Model.Interfaces.DAL
+namespace ATS.Models.Interfaces.DAL
 {
     public interface IManufacturerRepository : IRepository<Manufacturer>
     {
