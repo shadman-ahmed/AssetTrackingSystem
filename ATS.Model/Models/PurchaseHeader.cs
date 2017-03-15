@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATS.Model.Models
+namespace AssetTrackingSystem_v2.Models
 {
     public class PurchaseHeader
     {

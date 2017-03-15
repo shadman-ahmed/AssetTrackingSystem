@@ -84,6 +84,10 @@
     <Compile Include="Models\Manufacturer.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Organization.cs" />
+    <Compile Include="Models\PurchaseAttachments.cs" />
+    <Compile Include="Models\PurchaseDetails.cs" />
+    <Compile Include="Models\PurchaseDetailsSerialNo.cs" />
+    <Compile Include="Models\PurchaseHeader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
