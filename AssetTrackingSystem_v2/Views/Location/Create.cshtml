@@ -117,11 +117,9 @@
 
 @section JavaScript {
 
-    <script src="~/Scripts/AssetTracking/Location_Code.js"></script>
-
     <script type="text/javascript">
         $(document).ready(function () {
-
+            
             /* Load DropDownList for organization */
             $.ajax({
                 url: '/Organization/GetAllOrganization',
@@ -130,6 +128,9 @@
 
                     var defaultOption = "<option value=''>Select Organization</option>";
                     $('#OrganizationId').append(defaultOption);
+
+                    var defaultDropDownValue = '<option value="">Select Branch</option>';
+                    $('#BranchId').append(defaultDropDownValue);
 
                     $.each(data, function (key, organization) {
                         var options = "<option value='" + organization.Id + "'>" + organization.Name + "</option>";
@@ -142,30 +143,36 @@
             /* Load DropDownList for Branches from organization*/
 
             $("#OrganizationId").change(function () {
+                $("#Code").empty();
                 var organizationId = $("#OrganizationId").val();
+
                 var jsonData = { id: organizationId };
+
                 $("#BranchId").empty();
                 var defaultDropDownValue = '<option value="">Select Branch</option>';
                 $('#BranchId').append(defaultDropDownValue);
-                $.ajax({
-                    type: "POST",
-                    url: "/Location/GetBranchesByOrganization",
-                    contentType: "application/json",
-                    data: JSON.stringify(jsonData),
-                    success: function (branchList) {
-                        $.each(branchList, function (key, location) {
-                            var option = "<option value=" + location.Id + ">" + location.Name + "</option>";
-                            $("#BranchId").append(option);
-                        });
-                    }
 
-                });
+                if (organizationId != "") {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Location/GetBranchesByOrganization",
+                        contentType: "application/json",
+                        data: JSON.stringify(jsonData),
+                        success: function (branchList) {
+                            $.each(branchList, function (key, location) {
+                                var option = "<option value=" + location.Id + ">" + location.Name + "</option>";
+                                $("#BranchId").append(option);
+                            });
+                        }
+
+                    });
+                }
+                
             });
-
-           
+            
         });
 
-
     </script>
+    <script src="~/Scripts/AssetTracking/Location_Code.js"></script>
 }
 

@@ -27,14 +27,13 @@ namespace AssetTrackingSystem_v2.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.OrganizationList = GetOrganizations();
+            
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(Location location)
         {
-            ViewBag.OrganizationList = GetOrganizations();
 
             if (ModelState.IsValid && location != null)
             {
@@ -77,8 +76,6 @@ namespace AssetTrackingSystem_v2.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            ViewBag.OrganizationList = GetOrganizations();
-
             var location = _locationManager.GetById(id);
 
             return View(location);
@@ -87,9 +84,6 @@ namespace AssetTrackingSystem_v2.Controllers
         [HttpPost]
         public ActionResult Edit(Location location)
         {
-
-            ViewBag.OrganizationList = GetOrganizations();
-
             if (ModelState.IsValid && location != null)
             {
                 try
@@ -100,7 +94,7 @@ namespace AssetTrackingSystem_v2.Controllers
                     }
                     else
                     {
-                        if (_locationManager.GetAll(c => c.Id != location.Id && c.ShortName == location.ShortName).Count() > 0)
+                        if (_locationManager.GetAll(c => c.Id != location.Id && c.ShortName == location.ShortName).Any())
                         {
                             ModelState.AddModelError("ShortName", "ShortName for Location already exists.");
                         }
@@ -111,7 +105,7 @@ namespace AssetTrackingSystem_v2.Controllers
                     ViewBag.Msg = exception.GetType().ToString();
                 }
             }
-
+            
             return View(location);
         }
 
@@ -156,7 +150,6 @@ namespace AssetTrackingSystem_v2.Controllers
 
         public JsonResult GetBranchesByOrganization(int? id)
         {
-
             var branchList = _branchManager.GetAll(c => true);
 
             if (id != null)

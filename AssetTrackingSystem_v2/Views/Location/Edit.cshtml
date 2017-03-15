@@ -8,56 +8,64 @@
 <h2>Edit</h2>
 
 <hr />
-<div class="form-horizontal col-md-6 col-md-offset-3">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.OrganizationId, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.DropDownListFor(model => model.OrganizationId, new SelectList(ViewBag.OrganizationList, "Value", "Text"), new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.OrganizationId, "", new { @class = "text-danger" })
+    <div class="form-horizontal col-md-6 col-md-offset-3">
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrganizationId, htmlAttributes: new {@class = "control-label col-md-4"})
+            <div class="col-md-8">
+                @*@Html.DropDownListFor(model => model.OrganizationId, new SelectList(ViewBag.OrganizationList, "Value", "Text"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.OrganizationId, "", new { @class = "text-danger" })*@
+                @Html.DropDownListFor(model => model.OrganizationId, Enumerable.Empty<SelectListItem>(), new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.OrganizationId, null, new {@class = "text-danger"})
+                @Html.HiddenFor(model => model.OrganizationId, new {id = "selectedOrgId"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BranchId, htmlAttributes: new {@class = "control-label col-md-4"})
+            <div class="col-md-8">
+                @Html.DropDownListFor(model => model.BranchId, Enumerable.Empty<SelectListItem>(), new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.BranchId, "", new {@class = "text-danger"})
+                @Html.HiddenFor(model => model.BranchId, new {id = "selectedBranchId"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = "control-label col-md-4"})
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ShortName, htmlAttributes: new {@class = "control-label col-md-4"})
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.ShortName, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.ShortName, null, new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Code, htmlAttributes: new {@class = "control-label col-md-4"})
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Code, new {@class = "form-control", @readonly = "readonly"})
+                @Html.ValidationMessageFor(model => model.Code, null, new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <input type="submit" value="Save" class="btn btn-default"/>
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.BranchId, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.DropDownListFor(model => model.BranchId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.ShortName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-           @Html.TextBoxFor(model => model.Code, "Code", new { @class = "form-control", @readonly = "readonly" })
-        @Html.ValidationMessageFor(model => model.Code, null, new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-8">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-
+}
 
 <br />
 <div class="col-md-12">
@@ -66,5 +74,77 @@
 
 @section JavaScript {
    
+<script type="text/javascript">
+        $(document).ready(function () {
+            var selectedOrgId = $('#selectedOrgId').val();
+            var selectedBranchId = $('#selectedBranchId').val();
+
+            $('#BranchId').empty();
+            var defaultDropDownValue = '<option value="">Select Branch</option>';
+            $('#BranchId').append(defaultDropDownValue);
+
+            /* Load DropDownList for organization */
+            $.ajax({
+                url: '/Organization/GetAllOrganization',
+                contentType: 'application/json',
+                success: function (data) {
+
+                    $('#OrganizationId').empty();
+                    var defaultOption = "<option value=''>Select Organization</option>";
+                    $('#OrganizationId').append(defaultOption);
+
+                    $.each(data, function (key, organization) {
+                        var options = "<option value='" + organization.Id + "' " + (organization.Id == selectedOrgId ? 'selected' : '') +">" + organization.Name + "</option>";
+
+                        $('#OrganizationId').append(options);
+                    });
+                }
+            });
+
+            
+            /* Load DropDownList for Branches from organization*/
+            if (selectedOrgId != '' && selectedBranchId != '') {
+                getBranchDDLByOrgId(selectedOrgId, selectedBranchId);
+            }
+
+            $("#OrganizationId").change(function () {
+                var organizationId = $('#OrganizationId').val();
+
+                if (organizationId != '') {
+                    getBranchDDLByOrgId(organizationId);
+                } else {
+                    $('#BranchId').empty();
+                    var defaultDropDownValue = '<option value="">Select Branch</option>';
+                    $('#BranchId').append(defaultDropDownValue);
+                }
+
+            });
+
+        });
+
+        function getBranchDDLByOrgId(orgId, branchId) {
+            $('#BranchId').empty();
+            var defaultDropDownValue = '<option value="">Select Branch</option>';
+            $('#BranchId').append(defaultDropDownValue);
+
+            var organizationId = orgId;
+            var jsonData = { id: organizationId };
+            
+            $.ajax({
+                type: "POST",
+                url: "/Location/GetBranchesByOrganization",
+                contentType: "application/json",
+                data: JSON.stringify(jsonData),
+                success: function (branchList) {
+                    $.each(branchList, function (key, branch) {
+                        var option = "<option value='" + branch.Id + "' " + (branch.Id == branchId ? 'selected' : '') + ">" + branch.Name + "</option>";
+                        $("#BranchId").append(option);
+                    });
+            }
+
+        });
+    }
+
+</script>
 <script src="~/Scripts/AssetTracking/Location_Code.js"></script>
 }
