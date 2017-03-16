@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -14,13 +15,11 @@ namespace AssetTrackingSystem_v2.ViewModels
 
         public int VendorId { get; set; }
         
-        public string PurchasedBy { get; set; }
+        [Display(Name = "Organization")]
+        public int OrganizationId { get; set; }
 
-        public DateTime EntryDate { get; set; }
-        
-        public string CreatedBy { get; set; }
-
-        public DateTime CreatedOn { get; set; }
+        [Display(Name = "Branch")]
+        public int BranchId { get; set; }
 
         /* Purchase Attachment */
         public string FilePath { get; set; }
@@ -28,7 +27,17 @@ namespace AssetTrackingSystem_v2.ViewModels
         /* Purchase Details */
         public int PurchaseHeaderId { get; set; }
 
+        [Display(Name = "General Category")]
+        public int GeneralCategoryId { get; set; }
+
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
+
+        [Display(Name = "Product General Category Code")]
+        public string GeneralCategoryCode { get; set; }
+
+        [Display(Name = "Product Category Code")]
+        public string CategoryCode { get; set; }
 
         public int Quantity { get; set; }
 
