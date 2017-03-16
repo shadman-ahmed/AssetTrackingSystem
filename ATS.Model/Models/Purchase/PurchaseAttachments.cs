@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace AssetTrackingSystem_v2.Models
 
         public int PurchaseHeaderId { get; set; }
 
-        public byte[] FileData { get; set; }
+        [StringLength(250)]
+        public string FilePath { get; set; }
     }
 }

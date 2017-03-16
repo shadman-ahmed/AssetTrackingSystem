@@ -11,16 +11,16 @@ namespace AssetTrackingSystem_v2.Models
     {
         public int Id { get; set; }
 
-        [Required]
         public DateTime PurchaseDate { get; set; }
 
-        [Required]
         public int VendorId { get; set; }
 
+        [StringLength(250)]
         public string PurchasedBy { get; set; }
 
         public DateTime EntryDate { get; set; }
 
+        [StringLength(250)]
         public string CreatedBy { get; set; }
 
         public DateTime CreatedOn { get; set; }

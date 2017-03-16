@@ -102,4 +102,38 @@
         </ul>
     </li>
     <!-- End of Asset Info Menu -->
+    
+    <!-- Purchase info menu -->
+    <li class="@(ViewBag.Menu == "Purchase Info" ? "active open" : "#")">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-shopping-cart"></i>
+            <span class="menu-text"> Purchase Info </span>
+
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+
+        <b class="arrow"></b>
+
+        <ul class="submenu">
+            <li class="@(ViewBag.SubMenu == "PurchaseSearch" ? "active" : "#")">
+                <a href="@Url.Action("Search", "Organization")">
+                    <i class="menu-icon fa fa-caret-right"></i>
+                    Purchase Search
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+            <li class="@(ViewBag.SubMenu == "PurchaseEntry" ? "active" : "#")">
+                <a href="@Url.Action("Search", "Branch")">
+                    <i class="menu-icon fa fa-caret-right"></i>
+                    Purchase Entry
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+        </ul>
+    </li>
+    <!-- End of Purchase info menu -->
 </ul>

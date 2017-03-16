@@ -11,10 +11,8 @@ namespace AssetTrackingSystem_v2.Models
     {
         public int Id { get; set; }
 
-        [Required]
         public int SerialNo { get; set; }
 
-        [Required]
         public int PurchaseDetailsId { get; set; }
         
     }

@@ -11,15 +11,13 @@ namespace AssetTrackingSystem_v2.Models
     {
         public int Id { get; set; }
 
-        [Required]
         public int PurchaseHeaderId { get; set; }
 
-        [Required]
         public int CategoryId { get; set; }
 
         public int Quantity { get; set; }
 
-        public decimal UnitPrice { get; set; }
+        public long UnitPrice { get; set; }
 
         public int WarrantyPeriod { get; set; }
 
