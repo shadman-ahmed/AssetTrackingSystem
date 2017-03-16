@@ -275,6 +275,58 @@
                 }
                 */
             });
-        });
+
+            GetOrganizationDDL();
+            GetBranchDDL("");
+
+            $('#OrganizationId').change(function() {
+                var organizationId = $('#OrganizationId').val();
+
+                GetBranchDDL(organizationId);
+            });
+
+            /*Organization DDL */
+            function GetOrganizationDDL() {
+                $.ajax({
+                    url: '/Organization/GetAllOrganization',
+                    contentType: 'application/json',
+                    success: function(data) {
+
+                        var defaultOption = "<option value=''>Select Organization</option>";
+                        $('#OrganizationId').append(defaultOption);
+
+                        $.each(data,
+                            function(key, organization) {
+                                var options = "<option value='" + organization.Id + "'>" + organization.Name + "</option>";
+                                $('#OrganizationId').append(options);
+                            });
+                    }
+                });
+            }
+
+            function GetBranchDDL(OrgId) {
+                $('#BranchId').empty();
+                var defaultDropDownValue = '<option value="">Select Branch</option>';
+                $('#BranchId').append(defaultDropDownValue);
+
+                if (OrgId != '') {
+                    var jsonData = { id: OrgId }
+                    $.ajax({
+                        url: '/Location/GetBranchesByOrganization',
+                        contentType: 'application/json',
+                        data: JSON.stringify(jsonData),
+                        success: function(branchList) {
+                            $.each(branchList, function(key, branch) {
+
+                                if (branchList[0].OrganizationId == OrgId) {
+                                    var option = "<option value=" + branch.Id + ">" + branch.Name + "</option>";
+                                    $("#BranchId").append(option);
+                                }
+                            });
+                    }
+                });
+            }
+        }
+    });
     </script>
 }
