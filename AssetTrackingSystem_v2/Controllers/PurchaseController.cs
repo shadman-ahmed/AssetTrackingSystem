@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AssetTrackingSystem_v2.ViewModels;
 
 namespace AssetTrackingSystem_v2.Controllers
 {
@@ -19,6 +20,12 @@ namespace AssetTrackingSystem_v2.Controllers
         public ActionResult Create()
         {
             PartialMenuView("PurchaseEntry");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(PurchaseCreateVM purchaseCreateVm)
+        {
             return View();
         }
 
