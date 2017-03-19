@@ -13,6 +13,7 @@ namespace AssetTrackingSystem_v2.ViewModels
         /* Purchase Header */
         public DateTime PurchaseDate { get; set; }
 
+        [Display(Name = "Vendor")]
         public int VendorId { get; set; }
         
         [Display(Name = "Organization")]
@@ -40,13 +41,15 @@ namespace AssetTrackingSystem_v2.ViewModels
         public string CategoryCode { get; set; }
 
         public int Quantity { get; set; }
-
+        [Display(Name = "Unit Price")]
         public long UnitPrice { get; set; }
 
+        [Display(Name = "Warranty Period")]
         public int WarrantyPeriod { get; set; }
 
         public int WarrantyUnitId { get; set; }
 
+        [Display(Name = "Has Warranty")]
         public bool HasWarranty { get; set; }
     }
 }
