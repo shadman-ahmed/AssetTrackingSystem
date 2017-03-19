@@ -278,16 +278,18 @@
                 */
             });
 
+            /* DropDownList initialization */
             GetOrganizationDDL();
             GetBranchDDL("");
-
+            
+            /* Getting Branch DropDownList based on Organization */
             $('#OrganizationId').change(function() {
                 var organizationId = $('#OrganizationId').val();
 
                 GetBranchDDL(organizationId);
             });
 
-            /*Organization DDL */
+            /* Organization DDL */
             function GetOrganizationDDL() {
                 $.ajax({
                     url: '/Organization/GetAllOrganization',
