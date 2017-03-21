@@ -1,8 +1,200 @@
 ﻿
+@model AssetTrackingSystem_v2.ViewModels.PurchaseSearchVM
+
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<h2>Search</h2>
 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h4>Asset Purchase Search</h4>
+        <hr />
+        <div class = "container-fluid">
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                       
+                            @Html.LabelFor(model => model.GeneralCategoryId, htmlAttributes: new { @class = "control-label col-md-4" })
+                        
+                        
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.GeneralCategoryId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GeneralCategoryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            @Html.LabelFor(model => model.ManufacturerId, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.ManufacturerId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ManufacturerId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div>
+                            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.CategoryId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <div>
+                            @Html.LabelFor(model => model.WarrantyUnitId, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+                       
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.WarrantyUnitId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.WarrantyUnitId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div>
+                            @Html.LabelFor(model => model.ModelId, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.ModelId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ModelId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        
+                        <div>
+                            @Html.LabelFor(model => model.PurchaseDateFrom, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+
+                        <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.PurchaseDateFrom, new { @class = "form-control", id = "datepicker", Value = DateTime.Today.Date.ToShortDateString() })
+                                @Html.ValidationMessageFor(model => model.PurchaseDateFrom, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <div>
+                            @Html.LabelFor(model => model.SerialNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SerialNo, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+              </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div>
+                            @Html.LabelFor(model => model.WarrantyPeriodFrom, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.WarrantyPeriodFrom, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.WarrantyPeriodFrom, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div>
+                            @Html.LabelFor(model => model.WarrantyPeriodTo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.WarrantyPeriodTo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.WarrantyPeriodTo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <div>
+                            @Html.LabelFor(model => model.PurchaseDateTo, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.PurchaseDateTo, new { @class = "form-control", id = "datepicker", Value = DateTime.Today.Date.ToShortDateString() })
+                            @Html.ValidationMessageFor(model => model.PurchaseDateTo, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                
+                    <div class="form-group">
+                        
+                            @Html.LabelFor(model => model.PriceFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.PriceFrom, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PriceFrom, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.PriceTo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.PriceTo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PriceTo, "", new { @class = "text-danger" })
+                        </div>
+                        
+
+                    
+                    </div>
+
+                    
+
+
+                </div>
+           
+                <div class="row container-fluid">
+                    <div class="col-md-offset-8">
+                        <div class="btn btn-default">Cancel </div>
+                        <div class="btn btn-info">Search </div>
+                    </div>
+
+                </div>
+            
+            
+
+            <div class="row">
+                <hr />
+            </div>
+
+            </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-6 col-md-6">
+                <input type="submit" value="Print" class="btn btn-default" />
+            </div>
+        </div>
+
+        </div>
+    
+}

@@ -515,6 +515,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\PurchaseCreateVM.cs" />
+    <Compile Include="ViewModels\PurchaseSearchVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

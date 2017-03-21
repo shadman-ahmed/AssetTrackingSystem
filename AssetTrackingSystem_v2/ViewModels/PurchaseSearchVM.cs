@@ -31,6 +31,7 @@ namespace AssetTrackingSystem_v2.ViewModels
         [Display(Name = "To")]
         public int WarrantyPeriodTo { get; set; }
 
+        [Display(Name = "Warranty Unit")]
         public int WarrantyUnitId { get; set; }
 
         [Display(Name = "Purchase Date From")]
@@ -38,6 +39,9 @@ namespace AssetTrackingSystem_v2.ViewModels
 
         [Display(Name = "To")]
         public DateTime PurchaseDateTo { get; set; }
+
+        [Display(Name = "Serial")]
+        public int SerialNo { get; set; }
 
         public int Quantity { get; set; }
 
