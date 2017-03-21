@@ -260,7 +260,7 @@
                 //isRTL:true,
 
                 changeMonth: true,
-                changeYear: true,
+                changeYear: true
                 /*
                 showButtonPanel: true,
                 beforeShow: function() {
@@ -291,8 +291,9 @@
 
             /* Organization DDL */
             function GetOrganizationDDL() {
+                console.log('here');
                 $.ajax({
-                    url: '/Organization/GetAllOrganization',
+                    url: '/Loader/GetAllOrganization',
                     contentType: 'application/json',
                     success: function(data) {
 
