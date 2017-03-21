@@ -148,18 +148,6 @@ namespace AssetTrackingSystem_v2.Controllers
             return PartialView("_PartialMenu");
         }
 
-        public JsonResult GetAllOrganization(int? id)
-        {
-
-            var organizationList = _organizationManager.GetAll(c => true);
-
-
-
-            return Json(organizationList, JsonRequestBehavior.AllowGet);
-        }
-
-        // confusuad why id
-
         public List<SelectListItem> GetOrganizations()
         {
             var organizationDropDownList = new List<SelectListItem>();
