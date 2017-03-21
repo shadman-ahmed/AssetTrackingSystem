@@ -9,7 +9,7 @@
 
             var jsonData = { id: organizationId };
             $.ajax({
-                url: '/Branch/GetOrganizationById?id=' + organizationId,
+                url: '/Loader/GetOrganizationById?id=' + organizationId,
                 contentType: 'application/json',
                 data: JSON.stringify(jsonData),
                 success: function (organization) {
@@ -27,7 +27,7 @@
 
             var jsonData = { id: organizationId };
             $.ajax({
-                url: '/Branch/GetOrganizationById?id=' + organizationId,
+                url: '/Loader/GetOrganizationById?id=' + organizationId,
                 contentType: 'application/json',
                 data: JSON.stringify(jsonData),
                 success: function(organization) {

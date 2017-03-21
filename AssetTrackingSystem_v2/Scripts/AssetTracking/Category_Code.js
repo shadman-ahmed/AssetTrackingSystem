@@ -9,7 +9,7 @@ $(document).ready(function () {
 
         var jsonData = { id: generalCategoryId };
         $.ajax({
-            url: '/Category/GetgeneralCategoryById?id=' + generalCategoryId,
+            url: '/Loader/GetgeneralCategoryById?id=' + generalCategoryId,
             contentType: 'application/json',
             data: JSON.stringify(jsonData),
             success: function (generalCategory) {
@@ -27,7 +27,7 @@ $(document).ready(function () {
 
         var jsonData = { id: generalCategoryId };
         $.ajax({
-            url: '/Category/GetgeneralCategoryById?id=' + generalCategoryId,
+            url: '/Loader/GetgeneralCategoryById?id=' + generalCategoryId,
             contentType: 'application/json',
             data: JSON.stringify(jsonData),
             success: function (generalCategory) {

@@ -85,7 +85,7 @@
 
             /* Load DropDownList for organization */
             $.ajax({
-                url: '/Organization/GetAllOrganization',
+                url: '/Loader/GetAllOrganization',
                 contentType: 'application/json',
                 success: function (data) {
 
@@ -132,7 +132,7 @@
             
             $.ajax({
                 type: "POST",
-                url: "/Location/GetBranchesByOrganization",
+                url: "/Loader/GetBranchesByOrganization",
                 contentType: "application/json",
                 data: JSON.stringify(jsonData),
                 success: function (branchList) {

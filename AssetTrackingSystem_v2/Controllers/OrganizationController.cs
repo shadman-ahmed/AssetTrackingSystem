@@ -167,13 +167,5 @@ namespace AssetTrackingSystem_v2.Controllers
             return PartialView("_PartialMenu");
         }
 
-        public JsonResult GetAllOrganization()
-        {
-            
-            var organizations = _manager.GetAll(c => true).ToList();
-
-            return Json(organizations, JsonRequestBehavior.AllowGet);
-        }
-
     }
 }

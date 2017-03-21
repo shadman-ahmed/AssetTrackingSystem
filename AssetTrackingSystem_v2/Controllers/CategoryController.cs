@@ -171,33 +171,5 @@ namespace AssetTrackingSystem_v2.Controllers
 
             return generalCategoryDropDownList;
         }
-
-        public JsonResult GetgeneralCategoryById(int? id)
-        {
-            GeneralCategory generalCategory = null;
-
-            if (id != null)
-            {
-                generalCategory = _generalCategoryManager.GetById((int)id);
-            }
-
-            return Json(generalCategory, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult GetAllCategories()
-        {
-            var categoryList = _categoryManager.GetAll(c => true);
-            var generalCategoryList = _generalCategoryManager.GetAll(c => true);
-
-            var subCategoryList = categoryList.Join(generalCategoryList, category => category.GeneralCategoryId, gnrl => gnrl.Id,
-                (category, gnrl) => new
-                {
-                    GeneralCategory = gnrl.Name,
-                    Category = category
-                });
-
-            return Json(subCategoryList, JsonRequestBehavior.AllowGet);
-        }
-        
     }
 }

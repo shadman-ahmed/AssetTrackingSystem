@@ -173,32 +173,5 @@ namespace AssetTrackingSystem_v2.Controllers
             
             return organizationDropDownList;
         }
-
-        public JsonResult GetOrganizationById(int? id)
-        {
-            Organization organization = null;
-
-            if (id != null)
-            {
-                organization = _organizationManager.GetById((int) id);
-            }
-
-            return Json(organization, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult GetAllBranches()
-        {
-            var branchList = _branchManager.GetAll(c => true);
-            var organizationList = _organizationManager.GetAll(c => true);
-
-            var orgBranchList = branchList.Join(organizationList, branch => branch.OrganizationId, org => org.Id,
-                (branch, org) => new
-                {
-                    Organization = org.Name,
-                    Branch = branch
-                });
-
-            return Json(orgBranchList, JsonRequestBehavior.AllowGet);
-        }
     }
 }

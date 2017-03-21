@@ -7,7 +7,7 @@
 
         var jsonData = { id: branchId };
         $.ajax({
-            url: '/Location/GetBranchById?id=' + branchId,
+            url: '/Loader/GetBranchById?id=' + branchId,
             contentType: 'application/json',
             data: JSON.stringify(jsonData),
             success: function (branch) {
@@ -24,7 +24,7 @@
 
         var jsonData = { id: branchId };
         $.ajax({
-            url: '/Location/GetBranchById?id=' + branchId,
+            url: '/Loader/GetBranchById?id=' + branchId,
             contentType: 'application/json',
             data: JSON.stringify(jsonData),
             success: function (branch) {

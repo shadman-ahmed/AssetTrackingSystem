@@ -148,18 +148,6 @@ namespace AssetTrackingSystem_v2.Controllers
             return PartialView("_PartialMenu");
         }
 
-        public JsonResult GetBranchesByOrganization(int? id)
-        {
-            var branchList = _branchManager.GetAll(c => true);
-
-            if (id != null)
-            {
-                branchList = branchList.Where(c => c.OrganizationId == id).ToList();
-            }
-
-            return Json(branchList, JsonRequestBehavior.AllowGet);
-        }
-
         public JsonResult GetAllOrganization(int? id)
         {
 
@@ -169,6 +157,8 @@ namespace AssetTrackingSystem_v2.Controllers
 
             return Json(organizationList, JsonRequestBehavior.AllowGet);
         }
+
+        // confusuad why id
 
         public List<SelectListItem> GetOrganizations()
         {
@@ -191,63 +181,6 @@ namespace AssetTrackingSystem_v2.Controllers
             }
 
             return organizationDropDownList;
-        }
-
-        public JsonResult GetOrganizationById(int? id)
-        {
-            Organization organization = null;
-
-            if (id != null)
-            {
-                organization = _organizationManager.GetById((int)id);
-            }
-
-            return Json(organization, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult GetBranchById(int? id)
-        {
-            Branch branch = null;
-
-            if (id != null)
-            {
-                branch = _branchManager.GetById((int)id);
-            }
-
-            return Json(branch, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult GetAllLocations()
-        {
-            var locationList = _locationManager.GetAll(c => true);
-            var organizationList = _organizationManager.GetAll(c => true);
-            var branchList = _branchManager.GetAll(c => true);
-
-
-            var assetLocationList = from l in locationList
-                                    join org in organizationList on l.OrganizationId equals org.Id
-                                    select new
-                                    {
-                                        Location = l,
-                                        Organization = org.Name,
-                                        Name = l.Name,
-                                        l.BranchId,
-                                        l.ShortName,
-                                        l.Code
-                                    } into intermediate
-                                    join b in branchList on intermediate.BranchId equals b.Id
-                                    select new
-                                    {
-                                        Location = intermediate.Location,
-                                        Organization = intermediate.Organization,
-                                        Branch = b.Name,
-                                        Name = intermediate.Name,
-                                        ShortName = intermediate.ShortName,
-                                        Code = intermediate.Code
-                                    };
-
-
-            return Json(assetLocationList, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -157,15 +157,6 @@ namespace AssetTrackingSystem_v2.Controllers
 
             return PartialView("_PartialMenu");
         }
-
-        public JsonResult GetAllManufacturer()
-        {
-
-            var manufacturers = _manufacturerManager.GetAll(c => true).ToList();
-
-            return Json(manufacturers, JsonRequestBehavior.AllowGet);
-        }
-
         
     }
 }
