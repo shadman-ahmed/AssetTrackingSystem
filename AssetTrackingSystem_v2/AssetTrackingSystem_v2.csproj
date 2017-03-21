@@ -562,6 +562,7 @@
     <Content Include="Views\Location\Search.cshtml" />
     <Content Include="Views\Location\Details.cshtml" />
     <Content Include="Views\Purchase\Create.cshtml" />
+    <Content Include="Views\Purchase\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
