@@ -218,5 +218,18 @@ namespace AssetTrackingSystem_v2.Controllers
 
             return Json(modelList, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetManufacturerCodes(string code)
+        {
+            var manufacturerCodeList = _manufacturerManager.GetAll(c => true);
+
+            if (!String.IsNullOrEmpty(code))
+            {
+                manufacturerCodeList.Where(c => c.Code == code).ToList();
+            }
+
+            return Json(manufacturerCodeList, JsonRequestBehavior.AllowGet);
+        }
+        
     }
 }

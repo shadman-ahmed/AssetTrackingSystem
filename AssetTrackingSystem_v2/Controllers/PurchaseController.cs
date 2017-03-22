@@ -31,6 +31,7 @@ namespace AssetTrackingSystem_v2.Controllers
 
         public ActionResult Search()
         {
+            PartialMenuView("PurchaseSearch");
             return View();
         }
 

@@ -83,7 +83,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.PurchaseDate, new { @class = "form-control", id = "datepicker", Value = DateTime.Today.Date.ToShortDateString() })
+                        @Html.TextBoxFor(model => model.PurchaseDate, new { @class = "form-control", Value = DateTime.Today.Date.ToShortDateString() })
                         @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -254,7 +254,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#datepicker").datepicker({
+            $("#PurchaseDate").datepicker({
                 showOtherMonths: true,
                 selectOtherMonths: false,
                 //isRTL:true,
@@ -278,6 +278,14 @@
                 */
             });
 
+            /* Auto Complete Initialization */
+            $('#ManufacturerCode').autocomplete({
+                source: GetTagsForManufacturerCode()
+            });
+
+
+
+
             /* DropDownList initialization */
             GetOrganizationDDL();
             GetBranchDDL();
@@ -285,19 +293,37 @@
             GetModelDLL('');
 
             /* Getting Branch DropDownList based on Organization */
-            $('#OrganizationId').change(function () {
+            $('#OrganizationId').change(function() {
                 var organizationId = $('#OrganizationId').val();
 
                 GetBranchDDL(organizationId);
             });
 
             /* Getting Model DropDownList based on Manufacturer */
-            $('#ManufacturerId').change(function () {
+            $('#ManufacturerId').change(function() {
                 var manufacturerId = $('#ManufacturerId').val();
 
                 GetModelDLL(manufacturerId);
             });
 
+
+            /* Auto Complete Methods */
+            function GetTagsForManufacturerCode() {
+                var manufacturerCodeTags=[];
+
+                $.ajax({
+                    url: '/Loader/GetManufacturerCodes',
+                    contentType: 'application/json',
+                    success: function(data) {
+                        $.each(data,
+                            function (key, manufacturer) {
+                                manufacturerCodeTags.push(manufacturer.Code);
+                            });
+                    }
+                });
+
+                return manufacturerCodeTags;
+            }
 
 
             /* Organization DDL */
@@ -309,10 +335,15 @@
                     url: '/Loader/GetAllOrganization',
                     contentType: 'application/json',
                     success: function(data) {
-                        $.each(data, function(key, organization) {
-                            var options = "<option value='" + organization.Id + "'>" + organization.Name + "</option>";
-                            $('#OrganizationId').append(options);
-                        });
+                        $.each(data,
+                            function(key, organization) {
+                                var options = "<option value='" +
+                                    organization.Id +
+                                    "'>" +
+                                    organization.Name +
+                                    "</option>";
+                                $('#OrganizationId').append(options);
+                            });
                     }
                 });
             }
@@ -329,13 +360,14 @@
                         contentType: 'application/json',
                         data: JSON.stringify(jsonData),
                         success: function(branchList) {
-                            $.each(branchList, function (key, branch) {
+                            $.each(branchList,
+                                function(key, branch) {
 
-                                if (branchList[0].OrganizationId == OrgId) {
-                                    var option = "<option value=" + branch.Id + ">" + branch.Name + "</option>";
-                                    $("#BranchId").append(option);
-                                }
-                            });
+                                    if (branchList[key].OrganizationId == OrgId) {
+                                        var option = "<option value=" + branch.Id + ">" + branch.Name + "</option>";
+                                        $("#BranchId").append(option);
+                                    }
+                                });
                         }
                     });
                 }
@@ -348,11 +380,16 @@
                 $.ajax({
                     url: '/Loader/GetAllManufacturer',
                     contentType: 'application/json',
-                    success: function (data) {
-                        $.each(data, function (key, manufacturer) {
-                            var options = "<option value='" + manufacturer.Id + "'>" + manufacturer.Name + "</option>";
-                            $('#ManufacturerId').append(options);
-                        });
+                    success: function(data) {
+                        $.each(data,
+                            function(key, manufacturer) {
+                                var options = "<option value='" +
+                                    manufacturer.Id +
+                                    "'>" +
+                                    manufacturer.Name +
+                                    "</option>";
+                                $('#ManufacturerId').append(options);
+                            });
                     }
                 });
             }
@@ -368,19 +405,20 @@
                         url: '/Loader/GetModelsByManufacturerId',
                         contentType: 'application/json',
                         data: JSON.stringify(jsonData),
-                        success: function (modelList) {
-                            $.each(modelList, function (key, model) {
+                        success: function(modelList) {
+                            $.each(modelList,
+                                function(key, model) {
 
-                                if (modelList[0].ManufacturerId == manufacturerId) {
-                                    var option = "<option value=" + model.Id + ">" + model.Name + "</option>";
-                                    $("#ModelId").append(option);
-                                }
-                            });
+                                    if (modelList[key].ManufacturerId == manufacturerId) {
+                                        var option = "<option value=" + model.Id + ">" + model.Name + "</option>";
+                                        $("#ModelId").append(option);
+                                    }
+                                });
                         }
                     });
                 }
             }
 
-    });
+        });
     </script>
 }
