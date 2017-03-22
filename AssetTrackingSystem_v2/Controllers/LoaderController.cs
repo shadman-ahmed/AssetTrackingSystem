@@ -184,7 +184,7 @@ namespace AssetTrackingSystem_v2.Controllers
 
 
             var assetModelList = from m in modelList
-                                 join mf in manufacturerList on m.ManufacuturerId equals mf.Id
+                                 join mf in manufacturerList on m.ManufacturerId equals mf.Id
                                  select new
                                  {
                                      Model = m,
@@ -205,6 +205,18 @@ namespace AssetTrackingSystem_v2.Controllers
 
 
             return Json(assetModelList, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetModelsByManufacturerId(int? id)
+        {
+            var modelList = _modelManager.GetAll(c => true);
+
+            if (id != null)
+            {
+                modelList = modelList.Where(c => c.ManufacturerId == id).ToList();
+            }
+
+            return Json(modelList, JsonRequestBehavior.AllowGet);
         }
     }
 }

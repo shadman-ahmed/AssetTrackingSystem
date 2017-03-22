@@ -23,6 +23,7 @@ namespace AssetTrackingSystem_v2.Controllers
             _manager = new OrganizationManager();
             PartialMenuView();
         }
+
         [HttpGet]
         public ActionResult Create()
         {

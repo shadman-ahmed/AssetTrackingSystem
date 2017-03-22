@@ -22,7 +22,7 @@ namespace AssetTrackingSystem_v2.Models
 
         [Display(Name = "Manufacturer")]
         [Required]
-        public int ManufacuturerId { get; set; }
+        public int ManufacturerId { get; set; }
 
         public Category Category { get; set; }
 

@@ -46,7 +46,7 @@ namespace AssetTrackingSystem_v2.Controllers
                     var modelList = _modelManager.GetAll(c => true);
 
                     int modelExist = modelList
-                                        .Where(c => c.ManufacuturerId == model.ManufacuturerId)
+                                        .Where(c => c.ManufacturerId == model.ManufacturerId)
                                         .Where(c => c.CategoryId == model.CategoryId)
                                         .Where(c => c.Name == model.Name)
                                         .Count();

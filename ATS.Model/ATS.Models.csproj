@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201703061106143_Branch name not unique.Designer.cs">
       <DependentUpon>201703061106143_Branch name not unique.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703220806062_property name corrected for model entity.cs" />
+    <Compile Include="Migrations\201703220806062_property name corrected for model entity.Designer.cs">
+      <DependentUpon>201703220806062_property name corrected for model entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\Category.cs" />
@@ -100,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703061106143_Branch name not unique.resx">
       <DependentUpon>201703061106143_Branch name not unique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703220806062_property name corrected for model entity.resx">
+      <DependentUpon>201703220806062_property name corrected for model entity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

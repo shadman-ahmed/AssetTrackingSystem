@@ -136,36 +136,36 @@
             
             <div class="col-md-6">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.GeneralCategoryCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.ManufacturerCode, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.GeneralCategoryCode, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.GeneralCategoryCode, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.ManufacturerCode, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase" } })
+                        @Html.ValidationMessageFor(model => model.ManufacturerCode, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.CategoryCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.ModelCode, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.CategoryCode, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.CategoryCode, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.ModelCode, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase" } })
+                        @Html.ValidationMessageFor(model => model.ModelCode, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.GeneralCategoryId, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.ManufacturerId, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.GeneralCategoryId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.GeneralCategoryId, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.ManufacturerId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ManufacturerId, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.CategoryId, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @Html.LabelFor(model => model.ModelId, htmlAttributes: new {@class = "control-label col-md-2"})
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.CategoryId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.CategoryId, "", new {@class = "text-danger"})
+                        @Html.DropDownListFor(model => model.ModelId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ModelId, "", new {@class = "text-danger"})
                     </div>
                 </div>
             </div>
@@ -280,31 +280,39 @@
 
             /* DropDownList initialization */
             GetOrganizationDDL();
-            GetBranchDDL("");
-            
+            GetBranchDDL();
+            GetManufacturerDDL();
+            GetModelDLL('');
+
             /* Getting Branch DropDownList based on Organization */
-            $('#OrganizationId').change(function() {
+            $('#OrganizationId').change(function () {
                 var organizationId = $('#OrganizationId').val();
 
                 GetBranchDDL(organizationId);
             });
 
+            /* Getting Model DropDownList based on Manufacturer */
+            $('#ManufacturerId').change(function () {
+                var manufacturerId = $('#ManufacturerId').val();
+
+                GetModelDLL(manufacturerId);
+            });
+
+
+
             /* Organization DDL */
             function GetOrganizationDDL() {
-                console.log('here');
+                var defaultOption = "<option value=''>Select Organization</option>";
+                $('#OrganizationId').append(defaultOption);
+
                 $.ajax({
                     url: '/Loader/GetAllOrganization',
                     contentType: 'application/json',
                     success: function(data) {
-
-                        var defaultOption = "<option value=''>Select Organization</option>";
-                        $('#OrganizationId').append(defaultOption);
-
-                        $.each(data,
-                            function(key, organization) {
-                                var options = "<option value='" + organization.Id + "'>" + organization.Name + "</option>";
-                                $('#OrganizationId').append(options);
-                            });
+                        $.each(data, function(key, organization) {
+                            var options = "<option value='" + organization.Id + "'>" + organization.Name + "</option>";
+                            $('#OrganizationId').append(options);
+                        });
                     }
                 });
             }
@@ -317,21 +325,62 @@
                 if (OrgId != '') {
                     var jsonData = { id: OrgId }
                     $.ajax({
-                        url: '/Location/GetBranchesByOrganization',
+                        url: '/Loader/GetBranchesByOrganization',
                         contentType: 'application/json',
                         data: JSON.stringify(jsonData),
                         success: function(branchList) {
-                            $.each(branchList, function(key, branch) {
+                            $.each(branchList, function (key, branch) {
 
                                 if (branchList[0].OrganizationId == OrgId) {
                                     var option = "<option value=" + branch.Id + ">" + branch.Name + "</option>";
                                     $("#BranchId").append(option);
                                 }
                             });
+                        }
+                    });
+                }
+            }
+
+            function GetManufacturerDDL() {
+                var defaultOption = "<option value=''>Select Manufacturer</option>";
+                $('#ManufacturerId').append(defaultOption);
+
+                $.ajax({
+                    url: '/Loader/GetAllManufacturer',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        $.each(data, function (key, manufacturer) {
+                            var options = "<option value='" + manufacturer.Id + "'>" + manufacturer.Name + "</option>";
+                            $('#ManufacturerId').append(options);
+                        });
                     }
                 });
             }
-        }
+
+            function GetModelDLL(manufacturerId) {
+                $('#ModelId').empty();
+                var defaultDropDownValue = '<option value="">Select Model</option>';
+                $('#ModelId').append(defaultDropDownValue);
+
+                if (manufacturerId != '') {
+                    var jsonData = { id: manufacturerId }
+                    $.ajax({
+                        url: '/Loader/GetModelsByManufacturerId',
+                        contentType: 'application/json',
+                        data: JSON.stringify(jsonData),
+                        success: function (modelList) {
+                            $.each(modelList, function (key, model) {
+
+                                if (modelList[0].ManufacturerId == manufacturerId) {
+                                    var option = "<option value=" + model.Id + ">" + model.Name + "</option>";
+                                    $("#ModelId").append(option);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+
     });
     </script>
 }
