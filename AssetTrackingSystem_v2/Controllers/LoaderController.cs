@@ -122,7 +122,7 @@ namespace AssetTrackingSystem_v2.Controllers
 
             return Json(generalCategories, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetgeneralCategoryById(int? id)
+        public JsonResult GetGeneralCategoryById(int? id)
         {
             GeneralCategory generalCategory = null;
 
@@ -206,7 +206,6 @@ namespace AssetTrackingSystem_v2.Controllers
 
             return Json(assetModelList, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult GetModelsByManufacturerId(int? id)
         {
             var modelList = _modelManager.GetAll(c => true);
@@ -218,18 +217,5 @@ namespace AssetTrackingSystem_v2.Controllers
 
             return Json(modelList, JsonRequestBehavior.AllowGet);
         }
-
-        public JsonResult GetManufacturerCodes(string code)
-        {
-            var manufacturerCodeList = _manufacturerManager.GetAll(c => true);
-
-            if (!String.IsNullOrEmpty(code))
-            {
-                manufacturerCodeList.Where(c => c.Code == code).ToList();
-            }
-
-            return Json(manufacturerCodeList, JsonRequestBehavior.AllowGet);
-        }
-        
     }
 }

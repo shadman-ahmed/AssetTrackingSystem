@@ -19,6 +19,7 @@ namespace AssetTrackingSystem_v2.Controllers
         }
         public ActionResult Create()
         {
+            ModelState.Clear();
             PartialMenuView("PurchaseEntry");
             return View();
         }

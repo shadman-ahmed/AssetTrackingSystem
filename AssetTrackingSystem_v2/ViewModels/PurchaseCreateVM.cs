@@ -33,11 +33,14 @@ namespace AssetTrackingSystem_v2.ViewModels
         [Display(Name = "Model")]
         public int ModelId { get; set; }
 
-        [Display(Name = "Manufacturer Code")]
-        public string ManufacturerCode { get; set; }
+        [Display(Name = "General Category")]
+        public string GeneralCategoryId { get; set; }
 
-        [Display(Name = "Model Code")]
-        public string ModelCode { get; set; }
+        [Display(Name = "Category Code")]
+        public string Code { get; set; }
+
+        [Display(Name = "Product Category")]
+        public string CategoryId { get; set; }
 
         public int Quantity { get; set; }
         [Display(Name = "Unit Price")]
