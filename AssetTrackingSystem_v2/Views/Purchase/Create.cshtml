@@ -348,6 +348,10 @@
 
                         GetGeneralCategoryDDL(generalCategoryId);
                         GetCategoryDDL(generalCategoryId, categoryId);
+                    },
+                    error: function(data) {
+                        GetGeneralCategoryDDL();
+                        GetCategoryDDL();
                     }
                 });
             });
@@ -460,6 +464,7 @@
             }
 
             function GetGeneralCategoryDDL(selectedIndex) {
+                $('#GeneralCategoryId').empty();
                 var defaultOption = "<option value=''>Select General Category</option>";
                 $('#GeneralCategoryId').append(defaultOption);
 
