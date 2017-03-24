@@ -216,7 +216,7 @@
                     <div class="checkbox container-fluid">          
                         @Html.LabelFor(model => model.HasWarranty, new { @class = "col-md-2 col-sm-2 col-xs-2" })
                         <div class="col-md-10 col-sm-10 col-xs-10">
-                            @Html.CheckBoxFor(model => model.HasWarranty)
+                            @Html.CheckBoxFor(model => model.HasWarranty, new { @checked = "checked" })
                             @Html.ValidationMessageFor(model => model.HasWarranty, "", new { @class = "text-danger" })
                         </div>
                         
@@ -233,11 +233,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <hr />
-        </div>
-
+        
         <div class="container-fluid" id="divTable">
             
         </div>
@@ -517,25 +513,60 @@
         });
 
         function AddToTable() {
-            if ($('table').length) {
-                console.log('here');
-            } else {
+            
+            if (!$('table').length) {
                 makeTable('divTable');
             }
+
+            var index = $('#tableBody>tr').length;
+
+            var serial = index + 1;
+            var genCategory = $('#GeneralCategoryId').val();
+            var category = $('#CategoryId').val();
+            var warrenty = $('#HasWarranty').val();
+            var quantity = $('#Quantity').val();
+            var price = $('#UnitPrice').val();
+            var productToal = priceCell * quantityCell;
+            var total = total + productToalCell;
+
+            var serialCell = "<td>" +serial+ "</td>";
+            var genCategoryCell = "<td>" + genCategory + "</td>";
+            var categoryCell = "<td>" + category + "</td>";
+            var warrentyCell = "<td>" + warrenty + "</td>";
+            var quantityCell = "<td>" + quantity + "</td>";
+            var priceCell = "<td>" + price + "</td>";
+            var productToalCell = "<td>" + productToal + "</td>";
+
+            var trData = "<tr>" +
+                serialCell +
+                genCategoryCell +
+                categoryCell +
+                warrentyCell +
+                quantityCell +
+                priceCell +
+                productToalCell +
+                "</tr>";
+
+            $('#tableBody').append(trData);
         }
 
         function makeTable(elementId) {
             var element = document.getElementById('divTable');
 
-            var table = "<table id='tablePurchase' class='table table-bordered table-striped'><thead>" +
-                "<th>SL</th>" +
-                "<th>Gen. Category</th>" +
-                "<th>Category</th>" +
-                "<th>Warrenty</th>" +
-                "<th>Quantity</th>" +
-                "<th>Price</th>" +
-                "<th>Total</th>" +
-                "<th colspan='2'></th></thead><tbody></tbody></table>";
+            var table = "<div class='row'><hr /></div>" +
+                "<table id='tablePurchase' class='table table-bordered table-striped'>" +
+                    "<thead>" +
+                        "<th>SL</th>" +
+                        "<th>Gen. Category</th>" +
+                        "<th>Category</th>" +
+                        "<th>Warrenty</th>" +
+                        "<th>Quantity</th>" +
+                        "<th>Price</th>" +
+                        "<th>Total</th>" +
+                        "<th></th>" +
+                    "</thead>" +
+                    "<tbody id='tableBody'></tbody>" +
+                "</table>";
 
             element.innerHTML = table;
         }
