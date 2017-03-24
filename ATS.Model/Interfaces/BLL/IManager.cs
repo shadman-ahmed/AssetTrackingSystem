@@ -14,5 +14,6 @@ namespace ATS.Models.Interfaces.BLL
         bool Update(T entity);
         T GetById(int id);
         ICollection<T> GetAll(Expression<Func<T, bool>> predicateExpression);
+        T Get(Expression<Func<T, bool>> predicate);
     }
 }

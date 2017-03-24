@@ -44,5 +44,11 @@ namespace ATS.BLL
         {
             return _repository.Update(entity);
         }
+
+        public Category Get(Expression<Func<Category, bool>> predicate)
+        {
+
+            return _repository.Get(predicate);
+        }
     }
 }

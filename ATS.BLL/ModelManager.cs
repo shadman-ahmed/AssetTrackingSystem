@@ -53,5 +53,10 @@ namespace ATS.BLL
             return _repository.Update(entity);
         }
 
+        public Model Get(Expression<Func<Model, bool>> predicate)
+        {
+
+            return _repository.Get(predicate);
+        }
     }
 }

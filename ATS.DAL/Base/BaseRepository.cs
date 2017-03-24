@@ -51,5 +51,10 @@ namespace ATS.DAL.Base
         {
             return Table.Where(predicateExpression).ToList();
         }
+
+        public T Get(Expression<Func<T, bool>> predicate)
+        {
+            return Table.Where(predicate).FirstOrDefault();
+        }
     }
 }

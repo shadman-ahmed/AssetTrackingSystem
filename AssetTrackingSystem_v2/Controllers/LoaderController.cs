@@ -31,7 +31,6 @@ namespace AssetTrackingSystem_v2.Controllers
         }
         public JsonResult GetAllOrganization()
         {
-
             var organizations = _organizationManager.GetAll(c => true).ToList();
 
             return Json(organizations, JsonRequestBehavior.AllowGet);
@@ -216,6 +215,18 @@ namespace AssetTrackingSystem_v2.Controllers
             }
 
             return Json(modelList, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCategoryByCode(string code)
+        {
+            Category category = null;
+
+            if (!String.IsNullOrEmpty(code))
+            {
+                category = _categoryManager.Get(c => c.Code.Equals(code));
+            }
+
+            return Json(category, JsonRequestBehavior.AllowGet);
         }
     }
 }

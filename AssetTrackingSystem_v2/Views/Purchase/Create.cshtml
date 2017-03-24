@@ -287,7 +287,7 @@
             });
 
             /* Auto Complete Initialization */
-            $('#ManufacturerCode').autocomplete({
+            $('#Code').autocomplete({
                 source: GetCategoryCodeTags()
             });
 
@@ -335,6 +335,23 @@
                 });
             });
 
+            $('#Code').change(function () {
+                var manufacturerCode = $('#Code').val();
+
+                $.ajax({
+                    url: '/Loader/GetCategoryByCode',
+                    contentType: 'application/json',
+                    data: { code: manufacturerCode },
+                    success: function(data) {
+                        var categoryId = data.Id;
+                        var generalCategoryId = data.GeneralCategoryId;
+
+                        GetGeneralCategoryDDL(generalCategoryId);
+                        GetCategoryDDL(generalCategoryId, categoryId);
+                    }
+                });
+            });
+
             /* Auto Complete Methods */
             function GetCategoryCodeTags() {
                 var manufacturerCodeTags = [];
@@ -354,7 +371,7 @@
             }
 
             /* DDL */
-            function GetOrganizationDDL() {
+            function GetOrganizationDDL(selectedIndex) {
                 var defaultOption = "<option value=''>Select Organization</option>";
                 $('#OrganizationId').append(defaultOption);
 
@@ -364,11 +381,7 @@
                     success: function(data) {
                         $.each(data,
                             function(key, organization) {
-                                var options = "<option value='" +
-                                    organization.Id +
-                                    "'>" +
-                                    organization.Name +
-                                    "</option>";
+                                var options = "<option value='" + organization.Id + "' " + (selectedIndex == organization.Id ? 'selected' : '') + ">" + organization.Name + "</option>";
                                 $('#OrganizationId').append(options);
                             });
                     }
@@ -446,7 +459,7 @@
                 }
             }
 
-            function GetGeneralCategoryDDL() {
+            function GetGeneralCategoryDDL(selectedIndex) {
                 var defaultOption = "<option value=''>Select General Category</option>";
                 $('#GeneralCategoryId').append(defaultOption);
 
@@ -456,18 +469,14 @@
                     success: function (data) {
                         $.each(data,
                             function (key, object) {
-                                var options = "<option value='" +
-                                    object.Id +
-                                    "'>" +
-                                    object.Name +
-                                    "</option>";
+                                var options = "<option value='" + object.Id + "' " + (selectedIndex == object.Id ? 'selected' : '') + ">" + object.Name + "</option>";
                                 $('#GeneralCategoryId').append(options);
                             });
                     }
                 });
             }
 
-            function GetCategoryDDL(genCatId) {
+            function GetCategoryDDL(genCatId, selectedIndex) {
                 $('#CategoryId').empty();
                 var defaultDropDownValue = '<option value="">Select Category</option>';
                 $('#CategoryId').append(defaultDropDownValue);
@@ -483,7 +492,7 @@
                                 function (key, object) {
 
                                     if (object.Category.GeneralCategoryId == genCatId) {
-                                        var option = "<option value=" + object.Category.Id + ">" + object.Category.Name + "</option>";
+                                        var option = "<option value='" + object.Category.Id + "' " + (selectedIndex == object.Category.Id ? 'selected' : '') + ">" + object.Category.Name + "</option>";
                                         $("#CategoryId").append(option);
                                     }
                                 });

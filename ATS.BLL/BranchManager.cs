@@ -49,5 +49,10 @@ namespace ATS.BLL
         {
             return _repository.GetAll(predicateExpression);
         }
+
+        public Branch Get(Expression<Func<Branch, bool>> predicate)
+        {
+            return _repository.Get(predicate);
+        }
     }
 }

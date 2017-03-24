@@ -45,5 +45,10 @@ namespace ATS.BLL
         {
             return _repository.Update(entity);
         }
+
+        public GeneralCategory Get(Expression<Func<GeneralCategory, bool>> predicate)
+        {
+            return _repository.Get(predicate);
+        }
     }
 }

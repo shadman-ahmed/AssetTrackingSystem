@@ -50,5 +50,11 @@ namespace ATS.BLL
         {
             return _repository.GetAll(predicateExpression);
         }
+
+        public Location Get(Expression<Func<Location, bool>> predicate)
+        {
+
+            return _repository.Get(predicate);
+        }
     }
 }

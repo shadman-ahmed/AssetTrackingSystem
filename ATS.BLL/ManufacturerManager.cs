@@ -43,5 +43,11 @@ namespace ATS.BLL
         {
             return _repository.GetAll(predicateExpression);
         }
+
+        public Manufacturer Get(Expression<Func<Manufacturer, bool>> predicate)
+        {
+
+            return _repository.Get(predicate);
+        }
     }
 }
