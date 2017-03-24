@@ -233,11 +233,20 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <hr />
+        </div>
+
+        <div class="container-fluid" id="divTable">
+            
+        </div>
         
         <div class="row container-fluid">
             <div class="col-md-offset-10">
-                <div class="btn btn-default">Cancel</div>
-                <div class="btn btn-info">Add</div>
+                @*<div class="btn btn-default">Cancel</div>*@
+                <button type="reset" class="btn btn-default">Cancel</button>
+                <div class="btn btn-info" id="btnAdd" onclick="AddToTable()">Add</div>
             </div>
         </div>
 
@@ -506,5 +515,29 @@
                 }
             }
         });
+
+        function AddToTable() {
+            if ($('table').length) {
+                console.log('here');
+            } else {
+                makeTable('divTable');
+            }
+        }
+
+        function makeTable(elementId) {
+            var element = document.getElementById('divTable');
+
+            var table = "<table id='tablePurchase' class='table table-bordered table-striped'><thead>" +
+                "<th>SL</th>" +
+                "<th>Gen. Category</th>" +
+                "<th>Category</th>" +
+                "<th>Warrenty</th>" +
+                "<th>Quantity</th>" +
+                "<th>Price</th>" +
+                "<th>Total</th>" +
+                "<th colspan='2'></th></thead><tbody></tbody></table>";
+
+            element.innerHTML = table;
+        }
     </script>
 }
