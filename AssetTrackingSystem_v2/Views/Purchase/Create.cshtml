@@ -516,7 +516,7 @@
                     $('#HasWarranty').prop('checked', false);
                 }
             });
-            
+
 
             /* Auto Complete Methods */
             function GetCategoryCodeTags() {
@@ -555,7 +555,7 @@
             var category = $('#CategoryId').find(':selected').text();
 
             var warrenty = '';
-            if($('#HasWarranty').is(':checked')) {
+            if ($('#HasWarranty').is(':checked')) {
                 warrenty = $('#WarrantyPeriod').val();
             }
 
@@ -571,8 +571,10 @@
             var quantityCell = "<td>" + quantity + "</td>";
             var priceCell = "<td>" + price + "</td>";
             var productTotalCell = "<td>" + productTotal + "</td>";
-
-            var trData = "<tr>" +
+            var rowId = "tr-" + index;
+            var trData = "<tr id='" +
+                rowId +
+                "'>" +
                 serialCell +
                 genCategoryCell +
                 categoryCell +
@@ -580,7 +582,9 @@
                 quantityCell +
                 priceCell +
                 productTotalCell +
-                "<td class='text-align: center'><i class='btn btn-xs btn-danger fa fa-times' id=''></i></td></tr>";
+                "<td class='text-align: center'><i class='btn btn-xs btn-danger fa fa-times' onclick=RemoveRow(\'" +
+                rowId +
+                "\')></i></td></tr>";
 
             $('#tableBody').append(trData);
             $('#totalPrice').empty();
@@ -624,6 +628,13 @@
             $('#UnitPrice').empty();
             $('#HasWarranty').empty();
             $('#WarrantyPeriod').empty();
+        }
+
+        function RemoveRow(rowId) {
+            if (rowId != '') {
+                console.log(rowId);
+                $('#'+rowId).remove();
+            }
         }
     </script>
 }
