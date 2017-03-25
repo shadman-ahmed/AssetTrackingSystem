@@ -216,7 +216,7 @@
                     <div class="checkbox container-fluid">          
                         @Html.LabelFor(model => model.HasWarranty, new { @class = "col-md-2 col-sm-2 col-xs-2" })
                         <div class="col-md-10 col-sm-10 col-xs-10">
-                            @Html.CheckBoxFor(model => model.HasWarranty, new { @checked = "checked" })
+                            @Html.CheckBoxFor(model => model.HasWarranty)
                             @Html.ValidationMessageFor(model => model.HasWarranty, "", new { @class = "text-danger" })
                         </div>
                         
@@ -227,7 +227,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.WarrantyPeriod, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.WarrantyPeriod, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.WarrantyPeriod, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "In Months" } })
                         @Html.ValidationMessageFor(model => model.WarrantyPeriod, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -241,7 +241,7 @@
         <div class="row container-fluid">
             <div class="col-md-offset-10">
                 @*<div class="btn btn-default">Cancel</div>*@
-                <button type="reset" class="btn btn-default">Cancel</button>
+                <button type="reset" class="btn btn-default" id="btnCancel" onclick="ResetForm()">Cancel</button>
                 <div class="btn btn-info" id="btnAdd" onclick="AddToTable()">Add</div>
             </div>
         </div>
@@ -266,6 +266,157 @@
     <script src="~/assets/js/jquery-ui.min.js"></script>
 
     <script type="text/javascript">
+        /* DDL global methods */
+        function GetOrganizationDDL(selectedIndex) {
+            $('#OrganizationId').empty();
+            var defaultOption = "<option value=''>Select Organization</option>";
+            $('#OrganizationId').append(defaultOption);
+
+            $.ajax({
+                url: '/Loader/GetAllOrganization',
+                contentType: 'application/json',
+                success: function(data) {
+                    $.each(data,
+                        function(key, organization) {
+                            var options = "<option value='" +
+                                organization.Id +
+                                "' " +
+                                (selectedIndex == organization.Id ? 'selected' : '') +
+                                ">" +
+                                organization.Name +
+                                "</option>";
+                            $('#OrganizationId').append(options);
+                        });
+                }
+            });
+        }
+
+        function GetBranchDDL(OrgId) {
+            $('#BranchId').empty();
+            var defaultDropDownValue = '<option value="">Select Branch</option>';
+            $('#BranchId').append(defaultDropDownValue);
+
+            if (OrgId != '') {
+                var jsonData = { id: OrgId }
+                $.ajax({
+                    url: '/Loader/GetBranchesByOrganization',
+                    contentType: 'application/json',
+                    data: JSON.stringify(jsonData),
+                    success: function(branchList) {
+                        $.each(branchList,
+                            function(key, branch) {
+
+                                if (branchList[key].OrganizationId == OrgId) {
+                                    var option = "<option value=" + branch.Id + ">" + branch.Name + "</option>";
+                                    $("#BranchId").append(option);
+                                }
+                            });
+                    }
+                });
+            }
+        }
+
+        function GetManufacturerDDL() {
+            var defaultOption = "<option value=''>Select Manufacturer</option>";
+            $('#ManufacturerId').append(defaultOption);
+
+            $.ajax({
+                url: '/Loader/GetAllManufacturer',
+                contentType: 'application/json',
+                success: function(data) {
+                    $.each(data,
+                        function(key, manufacturer) {
+                            var options = "<option value='" +
+                                manufacturer.Id +
+                                "'>" +
+                                manufacturer.Name +
+                                "</option>";
+                            $('#ManufacturerId').append(options);
+                        });
+                }
+            });
+        }
+
+        function GetModelDLL(manufacturerId) {
+            $('#ModelId').empty();
+            var defaultDropDownValue = '<option value="">Select Model</option>';
+            $('#ModelId').append(defaultDropDownValue);
+
+            if (manufacturerId != '') {
+                var jsonData = { id: manufacturerId }
+                $.ajax({
+                    url: '/Loader/GetModelsByManufacturerId',
+                    contentType: 'application/json',
+                    data: JSON.stringify(jsonData),
+                    success: function(modelList) {
+                        $.each(modelList,
+                            function(key, model) {
+
+                                if (modelList[key].ManufacturerId == manufacturerId) {
+                                    var option = "<option value=" + model.Id + ">" + model.Name + "</option>";
+                                    $("#ModelId").append(option);
+                                }
+                            });
+                    }
+                });
+            }
+        }
+
+        function GetGeneralCategoryDDL(selectedIndex) {
+            $('#GeneralCategoryId').empty();
+            var defaultOption = "<option value=''>Select General Category</option>";
+            $('#GeneralCategoryId').append(defaultOption);
+
+            $.ajax({
+                url: '/Loader/GetAllGeneralCategory',
+                contentType: 'application/json',
+                success: function(data) {
+                    $.each(data,
+                        function(key, object) {
+                            var options = "<option value='" +
+                                object.Id +
+                                "' " +
+                                (selectedIndex == object.Id ? 'selected' : '') +
+                                ">" +
+                                object.Name +
+                                "</option>";
+                            $('#GeneralCategoryId').append(options);
+                        });
+                }
+            });
+        }
+
+        function GetCategoryDDL(genCatId, selectedIndex) {
+            $('#CategoryId').empty();
+            var defaultDropDownValue = '<option value="">Select Category</option>';
+            $('#CategoryId').append(defaultDropDownValue);
+
+            if (genCatId != '') {
+                var jsonData = { id: genCatId }
+                $.ajax({
+                    url: '/Loader/GetAllCategories',
+                    contentType: 'application/json',
+                    data: JSON.stringify(jsonData),
+                    success: function(modelList) {
+                        $.each(modelList,
+                            function(key, object) {
+
+                                if (object.Category.GeneralCategoryId == genCatId) {
+                                    var option = "<option value='" +
+                                        object.Category.Id +
+                                        "' " +
+                                        (selectedIndex == object.Category.Id ? 'selected' : '') +
+                                        ">" +
+                                        object.Category.Name +
+                                        "</option>";
+                                    $("#CategoryId").append(option);
+                                }
+                            });
+                    }
+                });
+            }
+        }
+
         $(document).ready(function() {
             $("#PurchaseDate").datepicker({
                 showOtherMonths: true,
@@ -323,15 +474,15 @@
                 GetCategoryDDL(generalCategoryId);
             });
 
-            $('#CategoryId').change(function () {
+            $('#CategoryId').change(function() {
                 var categoryId = $('#CategoryId').val();
-                
+
                 $('#Code').val();
 
                 $.ajax({
                     url: '/Loader/GetCategoryById',
                     data: {
-                        id : categoryId
+                        id: categoryId
                     },
                     contentType: 'application/json',
                     success: function(category) {
@@ -340,7 +491,7 @@
                 });
             });
 
-            $('#Code').change(function () {
+            $('#Code').change(function() {
                 var manufacturerCode = $('#Code').val();
 
                 $.ajax({
@@ -353,13 +504,19 @@
 
                         GetGeneralCategoryDDL(generalCategoryId);
                         GetCategoryDDL(generalCategoryId, categoryId);
-                    },
-                    error: function(data) {
-                        GetGeneralCategoryDDL();
-                        GetCategoryDDL();
                     }
                 });
             });
+
+            /* Warranty Checkbox Toggle */
+            $('#WarrantyPeriod').change(function() {
+                if ($('#WarrantyPeriod').val() != '') {
+                    $('#HasWarranty').prop('checked', true);
+                } else {
+                    $('#HasWarranty').prop('checked', false);
+                }
+            });
+            
 
             /* Auto Complete Methods */
             function GetCategoryCodeTags() {
@@ -370,7 +527,7 @@
                     contentType: 'application/json',
                     success: function(data) {
                         $.each(data,
-                            function (key, object) {
+                            function(key, object) {
                                 manufacturerCodeTags.push(object.Category.Code);
                             });
                     }
@@ -379,163 +536,41 @@
                 return manufacturerCodeTags;
             }
 
-            /* DDL */
-            function GetOrganizationDDL(selectedIndex) {
-                var defaultOption = "<option value=''>Select Organization</option>";
-                $('#OrganizationId').append(defaultOption);
-
-                $.ajax({
-                    url: '/Loader/GetAllOrganization',
-                    contentType: 'application/json',
-                    success: function(data) {
-                        $.each(data,
-                            function(key, organization) {
-                                var options = "<option value='" + organization.Id + "' " + (selectedIndex == organization.Id ? 'selected' : '') + ">" + organization.Name + "</option>";
-                                $('#OrganizationId').append(options);
-                            });
-                    }
-                });
-            }
-
-            function GetBranchDDL(OrgId) {
-                $('#BranchId').empty();
-                var defaultDropDownValue = '<option value="">Select Branch</option>';
-                $('#BranchId').append(defaultDropDownValue);
-
-                if (OrgId != '') {
-                    var jsonData = { id: OrgId }
-                    $.ajax({
-                        url: '/Loader/GetBranchesByOrganization',
-                        contentType: 'application/json',
-                        data: JSON.stringify(jsonData),
-                        success: function(branchList) {
-                            $.each(branchList,
-                                function(key, branch) {
-
-                                    if (branchList[key].OrganizationId == OrgId) {
-                                        var option = "<option value=" + branch.Id + ">" + branch.Name + "</option>";
-                                        $("#BranchId").append(option);
-                                    }
-                                });
-                        }
-                    });
-                }
-            }
-
-            function GetManufacturerDDL() {
-                var defaultOption = "<option value=''>Select Manufacturer</option>";
-                $('#ManufacturerId').append(defaultOption);
-
-                $.ajax({
-                    url: '/Loader/GetAllManufacturer',
-                    contentType: 'application/json',
-                    success: function(data) {
-                        $.each(data,
-                            function(key, manufacturer) {
-                                var options = "<option value='" +
-                                    manufacturer.Id +
-                                    "'>" +
-                                    manufacturer.Name +
-                                    "</option>";
-                                $('#ManufacturerId').append(options);
-                            });
-                    }
-                });
-            }
-
-            function GetModelDLL(manufacturerId) {
-                $('#ModelId').empty();
-                var defaultDropDownValue = '<option value="">Select Model</option>';
-                $('#ModelId').append(defaultDropDownValue);
-
-                if (manufacturerId != '') {
-                    var jsonData = { id: manufacturerId }
-                    $.ajax({
-                        url: '/Loader/GetModelsByManufacturerId',
-                        contentType: 'application/json',
-                        data: JSON.stringify(jsonData),
-                        success: function (modelList) {
-                            $.each(modelList,
-                                function (key, model) {
-
-                                    if (modelList[key].ManufacturerId == manufacturerId) {
-                                        var option = "<option value=" + model.Id + ">" + model.Name + "</option>";
-                                        $("#ModelId").append(option);
-                                    }
-                                });
-                        }
-                    });
-                }
-            }
-
-            function GetGeneralCategoryDDL(selectedIndex) {
-                $('#GeneralCategoryId').empty();
-                var defaultOption = "<option value=''>Select General Category</option>";
-                $('#GeneralCategoryId').append(defaultOption);
-
-                $.ajax({
-                    url: '/Loader/GetAllGeneralCategory',
-                    contentType: 'application/json',
-                    success: function (data) {
-                        $.each(data,
-                            function (key, object) {
-                                var options = "<option value='" + object.Id + "' " + (selectedIndex == object.Id ? 'selected' : '') + ">" + object.Name + "</option>";
-                                $('#GeneralCategoryId').append(options);
-                            });
-                    }
-                });
-            }
-
-            function GetCategoryDDL(genCatId, selectedIndex) {
-                $('#CategoryId').empty();
-                var defaultDropDownValue = '<option value="">Select Category</option>';
-                $('#CategoryId').append(defaultDropDownValue);
-
-                if (genCatId != '') {
-                    var jsonData = { id: genCatId }
-                    $.ajax({
-                        url: '/Loader/GetAllCategories',
-                        contentType: 'application/json',
-                        data: JSON.stringify(jsonData),
-                        success: function (modelList) {
-                            $.each(modelList,
-                                function (key, object) {
-
-                                    if (object.Category.GeneralCategoryId == genCatId) {
-                                        var option = "<option value='" + object.Category.Id + "' " + (selectedIndex == object.Category.Id ? 'selected' : '') + ">" + object.Category.Name + "</option>";
-                                        $("#CategoryId").append(option);
-                                    }
-                                });
-                        }
-                    });
-                }
-            }
         });
 
+        //global variable for total price
+        var total = 0;
+
         function AddToTable() {
-            
+
             if (!$('table').length) {
                 makeTable('divTable');
+
             }
 
             var index = $('#tableBody>tr').length;
 
             var serial = index + 1;
-            var genCategory = $('#GeneralCategoryId').val();
-            var category = $('#CategoryId').val();
-            var warrenty = $('#HasWarranty').val();
+            var genCategory = $('#GeneralCategoryId').find(':selected').text();
+            var category = $('#CategoryId').find(':selected').text();
+
+            var warrenty = '';
+            if($('#HasWarranty').is(':checked')) {
+                warrenty = $('#WarrantyPeriod').val();
+            }
+
             var quantity = $('#Quantity').val();
             var price = $('#UnitPrice').val();
-            var productToal = priceCell * quantityCell;
-            var total = total + productToalCell;
+            var productTotal = price * quantity;
+            total += productTotal;
 
-            var serialCell = "<td>" +serial+ "</td>";
+            var serialCell = "<td>" + serial + "</td>";
             var genCategoryCell = "<td>" + genCategory + "</td>";
             var categoryCell = "<td>" + category + "</td>";
             var warrentyCell = "<td>" + warrenty + "</td>";
             var quantityCell = "<td>" + quantity + "</td>";
             var priceCell = "<td>" + price + "</td>";
-            var productToalCell = "<td>" + productToal + "</td>";
+            var productTotalCell = "<td>" + productTotal + "</td>";
 
             var trData = "<tr>" +
                 serialCell +
@@ -544,10 +579,13 @@
                 warrentyCell +
                 quantityCell +
                 priceCell +
-                productToalCell +
-                "</tr>";
+                productTotalCell +
+                "<td class='text-align: center'><i class='btn btn-xs btn-danger fa fa-times' id=''></i></td></tr>";
 
             $('#tableBody').append(trData);
+            $('#totalPrice').empty();
+            $('#totalPrice').append(total);
+            ResetForm();
         }
 
         function makeTable(elementId) {
@@ -555,20 +593,37 @@
 
             var table = "<div class='row'><hr /></div>" +
                 "<table id='tablePurchase' class='table table-bordered table-striped'>" +
-                    "<thead>" +
-                        "<th>SL</th>" +
-                        "<th>Gen. Category</th>" +
-                        "<th>Category</th>" +
-                        "<th>Warrenty</th>" +
-                        "<th>Quantity</th>" +
-                        "<th>Price</th>" +
-                        "<th>Total</th>" +
-                        "<th></th>" +
-                    "</thead>" +
-                    "<tbody id='tableBody'></tbody>" +
-                "</table>";
+                "<thead>" +
+                "<th>SL</th>" +
+                "<th>Gen. Category</th>" +
+                "<th>Category</th>" +
+                "<th>Warrenty</th>" +
+                "<th>Quantity</th>" +
+                "<th>Price</th>" +
+                "<th>Total</th>" +
+                "<th colspan='3'></th>" +
+                "</thead>" +
+                "<tbody id='tableBody'></tbody>" +
+                "</table><div class='col-md-12'><div class='col-md-4'></div><div class='col-md-4'></div><div class='col-md-4'><b>Total Price: <span id='totalPrice'></span></b></div></div>";
 
             element.innerHTML = table;
+        }
+
+        function ResetForm() {
+            GetOrganizationDDL();
+            GetBranchDDL();
+            GetManufacturerDDL();
+            GetModelDLL();
+            GetCategoryDDL();
+            GetGeneralCategoryDDL();
+            $('#PurchaseDate').empty();
+            $('#VendorId').empty();
+            $('#PurchaseDate').empty();
+            $('#Code').empty();
+            $('#Quantity').empty();
+            $('#UnitPrice').empty();
+            $('#HasWarranty').empty();
+            $('#WarrantyPeriod').empty();
         }
     </script>
 }
