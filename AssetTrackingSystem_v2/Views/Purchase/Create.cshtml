@@ -564,7 +564,24 @@
             var productTotal = price * quantity;
             total += productTotal;
 
-            var serialCell = "<td>" + serial + "</td>";
+            /* purchaseHeader fields*/
+            var purchaseDateField = "<input type='hidden' name='' value='" + $('$PurchaseDate').val() +"'>";
+            var vendorField = "<input type='hidden' name='' value='" + $('#VendorId').val() +"'>";
+
+            /* purchaseAttachment fields*/
+            var filePathField = "<input type='hidden' name='' value='" + $('#FilePath').val() + "'>";
+            
+            /* purchaseDetails fields */
+            var genCategoryField = "<input type='hidden' name='' value='" + $('#GeneralCategoryId').val() + "'>";
+            var categoryField = "<input type='hidden' name='' value='" + $('#CategoryId').val()+"'>";
+            var warrentyField = "<input type='hidden' name='' value='" + warrenty +"'>";
+            var quantityField = "<input type='hidden' name='' value='" + quantity +"'>";
+            var priceField = "<input type='hidden' name='' value='" + price +"'>";
+            var modelField = "<input type='hidden' name='' value='" + $('#ModelId').val() +"'>";
+            var manufacturerField = "<input type='hidden' name='' value='" + $('ManufacturerId').val() + "'>";
+
+
+            var serialCell = "<td>" + serial + purchaseDateField + vendorField + filePathField + genCategoryField + categoryField + warrentyField + quantityField + priceField + modelField + manufacturerField + "</td>";
             var genCategoryCell = "<td>" + genCategory + "</td>";
             var categoryCell = "<td>" + category + "</td>";
             var warrentyCell = "<td>" + warrenty + "</td>";
@@ -620,6 +637,7 @@
             GetModelDLL();
             GetCategoryDDL();
             GetGeneralCategoryDDL();
+
             $('#PurchaseDate').empty();
             $('#VendorId').empty();
             $('#PurchaseDate').empty();
