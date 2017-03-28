@@ -136,4 +136,31 @@
         </ul>
     </li>
     <!-- End of Purchase info menu -->
+
+    <!-- Asset info menu -->
+    <li class="@(ViewBag.Menu == "Asset Info" ? "active open" : "#")">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-shopping-cart"></i>
+            <span class="menu-text"> Asset Info </span>
+
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+
+        <b class="arrow"></b>
+
+        <ul class="submenu">
+            <li class="@(ViewBag.SubMenu == "AssetRegistration" ? "active" : "#")">
+                <a href="@Url.Action("Create", "Asset")">
+                    <i class="menu-icon fa fa-caret-right"></i>
+                    Asset Registration from Purchase
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+ 
+
+        </ul>
+    </li>
+    <!-- End of Asset info menu -->
 </ul>
