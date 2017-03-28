@@ -81,8 +81,12 @@
       <DependentUpon>201703220806062_property name corrected for model entity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Asset\Asset.cs" />
+    <Compile Include="Models\Asset\AssetRegistration.cs" />
+    <Compile Include="Models\Asset\AssetRegistrationDetails.cs" />
     <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\GeneralCategory.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Manufacturer.cs" />
