@@ -1,0 +1,365 @@
+﻿@using System.Web.UI.WebControls
+@model AssetTrackingSystem_v2.ViewModels.AssetRegistrationVM
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h4>Asset Registration from Purchase</h4>
+        <hr />
+
+        <h5>Purchase Item Search</h5>
+        <hr />
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        <div>
+                            @Html.LabelFor(model => model.PurchaseDateFrom, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.PurchaseDateFrom, new { @class = "form-control", Value = DateTime.Today.Date.ToShortDateString() })
+                            @Html.ValidationMessageFor(model => model.PurchaseDateFrom, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.GeneralCategoryId, htmlAttributes: new { @class = "control-label col-md-4" })
+
+
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.GeneralCategoryId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GeneralCategoryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+
+                <div class="col-md-6">
+                    
+                    <div class="form-group">
+
+                        <div>
+                            @Html.LabelFor(model => model.PurchaseDateTo, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.PurchaseDateTo, new { @class = "form-control", Value = DateTime.Today.Date.ToShortDateString() })
+                            @Html.ValidationMessageFor(model => model.PurchaseDateTo, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase" } })
+                            @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    
+                    <div class="form-group">
+                        <div>
+                            @Html.LabelFor(model => model.ManufacturerId, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.ManufacturerId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ManufacturerId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <div>
+                            @Html.LabelFor(model => model.ModelId, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.ModelId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ModelId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    
+                    <div class="form-group">
+                        <div>
+                            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-4" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.CategoryId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    
+                </div>
+
+            </div>
+
+
+            <div class="row container-fluid">
+                <div class="col-md-offset-11">
+                    <div class="btn btn-info">Search </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+                <hr />
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-6 col-md-6">
+                <input type="submit" value="Register" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+
+}
+
+@section JavaScript {
+    <script src="~/assets/js/jquery-ui.min.js"></script>
+
+    <script type="text/javascript">
+
+        function GetManufacturerDDL() {
+            var defaultOption = "<option value=''>Select Manufacturer</option>";
+            $('#ManufacturerId').append(defaultOption);
+
+            $.ajax({
+                url: '/Loader/GetAllManufacturer',
+                contentType: 'application/json',
+                success: function (data) {
+                    $.each(data,
+                        function (key, manufacturer) {
+                            var options = "<option value='" +
+                                manufacturer.Id +
+                                "'>" +
+                                manufacturer.Name +
+                                "</option>";
+                            $('#ManufacturerId').append(options);
+                        });
+                }
+            });
+        }
+
+        function GetModelDLL(manufacturerId) {
+            $('#ModelId').empty();
+            var defaultDropDownValue = '<option value="">Select Model</option>';
+            $('#ModelId').append(defaultDropDownValue);
+
+            if (manufacturerId != '') {
+                var jsonData = { id: manufacturerId }
+                $.ajax({
+                    url: '/Loader/GetModelsByManufacturerId',
+                    contentType: 'application/json',
+                    data: JSON.stringify(jsonData),
+                    success: function (modelList) {
+                        $.each(modelList,
+                            function (key, model) {
+
+                                if (modelList[key].ManufacturerId == manufacturerId) {
+                                    var option = "<option value=" + model.Id + ">" + model.Name + "</option>";
+                                    $("#ModelId").append(option);
+                                }
+                            });
+                    }
+                });
+            }
+        }
+
+        function GetGeneralCategoryDDL(selectedIndex) {
+            $('#GeneralCategoryId').empty();
+            var defaultOption = "<option value=''>Select General Category</option>";
+            $('#GeneralCategoryId').append(defaultOption);
+
+            $.ajax({
+                url: '/Loader/GetAllGeneralCategory',
+                contentType: 'application/json',
+                success: function (data) {
+                    $.each(data,
+                        function (key, object) {
+                            var options = "<option value='" +
+                                object.Id +
+                                "' " +
+                                (selectedIndex == object.Id ? 'selected' : '') +
+                                ">" +
+                                object.Name +
+                                "</option>";
+                            $('#GeneralCategoryId').append(options);
+                        });
+                }
+            });
+        }
+
+        function GetCategoryDDL(genCatId, selectedIndex) {
+            $('#CategoryId').empty();
+            var defaultDropDownValue = '<option value="">Select Category</option>';
+            $('#CategoryId').append(defaultDropDownValue);
+
+            if (genCatId != '') {
+                var jsonData = { id: genCatId }
+                $.ajax({
+                    url: '/Loader/GetAllCategories',
+                    contentType: 'application/json',
+                    data: JSON.stringify(jsonData),
+                    success: function (modelList) {
+                        $.each(modelList,
+                            function (key, object) {
+
+                                if (object.Category.GeneralCategoryId == genCatId) {
+                                    var option = "<option value='" +
+                                        object.Category.Id +
+                                        "' " +
+                                        (selectedIndex == object.Category.Id ? 'selected' : '') +
+                                        ">" +
+                                        object.Category.Name +
+                                        "</option>";
+                                    $("#CategoryId").append(option);
+                                }
+                            });
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function () {
+            $("#PurchaseDateFrom").datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: false,
+                
+
+                changeMonth: true,
+                changeYear: true
+                
+            });
+
+            $("#PurchaseDateTo").datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: false,
+
+
+                changeMonth: true,
+                changeYear: true
+
+            });
+
+
+            /* Auto Complete Initialization */
+            $('#Code').autocomplete({
+                source: GetCategoryCodeTags()
+            });
+
+            /* DropDownList initialization */
+            
+            GetManufacturerDDL();
+            GetModelDLL();
+            GetGeneralCategoryDDL();
+            GetCategoryDDL('');
+
+            /* Casecade DDL */
+
+            $('#ManufacturerId').change(function () {
+                var manufacturerId = $('#ManufacturerId').val();
+
+                GetModelDLL(manufacturerId);
+            });
+
+            $('#GeneralCategoryId').change(function () {
+                var generalCategoryId = $('#GeneralCategoryId').val();
+
+                GetCategoryDDL(generalCategoryId);
+            });
+
+            $('#CategoryId').change(function () {
+                var categoryId = $('#CategoryId').val();
+
+                $('#Code').val();
+
+                $.ajax({
+                    url: '/Loader/GetCategoryById',
+                    data: {
+                        id: categoryId
+                    },
+                    contentType: 'application/json',
+                    success: function (category) {
+                        $('#Code').val(category.Code);
+                    }
+                });
+            });
+
+            $('#Code').change(function () {
+                var manufacturerCode = $('#Code').val();
+
+                $.ajax({
+                    url: '/Loader/GetCategoryByCode',
+                    contentType: 'application/json',
+                    data: { code: manufacturerCode },
+                    success: function (data) {
+                        var categoryId = data.Id;
+                        var generalCategoryId = data.GeneralCategoryId;
+
+                        GetGeneralCategoryDDL(generalCategoryId);
+                        GetCategoryDDL(generalCategoryId, categoryId);
+                    }
+                });
+            });
+
+
+            /* Auto Complete Methods */
+            function GetCategoryCodeTags() {
+                var manufacturerCodeTags = [];
+
+                $.ajax({
+                    url: '/Loader/GetAllCategories',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        $.each(data,
+                            function (key, object) {
+                                manufacturerCodeTags.push(object.Category.Code);
+                            });
+                    }
+                });
+
+                return manufacturerCodeTags;
+            }
+
+        });
+
+    </script>
+}
