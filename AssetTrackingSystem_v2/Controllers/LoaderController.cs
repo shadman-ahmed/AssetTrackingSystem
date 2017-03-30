@@ -187,7 +187,7 @@ namespace AssetTrackingSystem_v2.Controllers
                                  select new
                                  {
                                      Model = m,
-                                     Manufacuturer = mf.Name,
+                                     Manufacturer = mf.Name,
                                      Name = m.Name,
                                      m.Description,
                                      m.CategoryId
@@ -196,7 +196,7 @@ namespace AssetTrackingSystem_v2.Controllers
                                  select new
                                  {
                                      Model = intermediate.Model,
-                                     Manufacuturer = intermediate.Manufacuturer,
+                                     Manufacturer = intermediate.Manufacturer,
                                      Category = c.Name,
                                      Name = intermediate.Name,
                                      Description = intermediate.Description
