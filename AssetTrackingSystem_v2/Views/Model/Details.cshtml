@@ -21,19 +21,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.ManufacturerId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ManufacuturerId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ManufacuturerId)
+            @Html.HiddenFor(model => model.ManufacturerId)
+            @Html.LabelFor(model => model.ManufacturerId, new { id = "manufacturer" })
         </dd>
 
         <dt>
@@ -41,7 +34,16 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CategoryId)
+            @Html.HiddenFor(model => model.CategoryId)
+            @Html.LabelFor(model => model.CategoryId, new { id = "category" })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
         </dd>
 
     </dl>
@@ -50,3 +52,9 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Search", "Model")
 </p>
+
+@section JavaScript {
+
+        <script src="~/Scripts/AssetTracking/ManufacturerNameById.js"></script>
+        <script src="~/Scripts/AssetTracking/CategoryNameById.js"></script>
+}
