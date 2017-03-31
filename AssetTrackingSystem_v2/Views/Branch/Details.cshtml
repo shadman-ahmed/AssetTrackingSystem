@@ -40,7 +40,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OrganizationId)
+            @Html.HiddenFor(model => model.OrganizationId)
+            @Html.LabelFor(model => model.OrganizationId, new { id = "Organization" })
         </dd>
 
     </dl>
@@ -49,3 +50,9 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Search")
 </p>
+
+@section JavaScript {
+    
+    <script src="~/Scripts/AssetTracking/OrganizatioNameById.js"></script>
+
+}

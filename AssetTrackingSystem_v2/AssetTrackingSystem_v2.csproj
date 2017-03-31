@@ -411,6 +411,7 @@
     <Content Include="Scripts\AssetTracking\Branch_Code.js" />
     <Content Include="Scripts\AssetTracking\Category_Code.js" />
     <Content Include="Scripts\AssetTracking\Location_Code.js" />
+    <Content Include="Scripts\AssetTracking\OrganizatioNameById.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
