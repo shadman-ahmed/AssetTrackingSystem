@@ -5,7 +5,7 @@
 
     var jsonData = { id: branchId };
     $.ajax({
-        url: '/Loader/GetOrganizationById?id=' + branchId,
+        url: '/Loader/GetBranchById?id=' + branchId,
         contentType: 'application/json',
         data: JSON.stringify(jsonData),
         success: function (branch) {
