@@ -17,7 +17,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OrganizationId)
+            @Html.HiddenFor(model => model.OrganizationId)
+            @Html.LabelFor(model => model.OrganizationId, new { id = "Organization" })
         </dd>
 
         <dt>
@@ -25,7 +26,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BranchId)
+            @Html.HiddenFor(model => model.BranchId)
+            @Html.LabelFor(model => model.BranchId, new { id = "Branch" })
         </dd>
 
         <dt>
@@ -58,3 +60,8 @@
     @Html.ActionLink("Back to List", "Search", "Location")
 </p>
 
+@section JavaScript {
+
+    <script src="~/Scripts/AssetTracking/OrganizationNameById.js"></script>
+    <script src="~/Scripts/AssetTracking/BranchNameById.js"></script>
+}
