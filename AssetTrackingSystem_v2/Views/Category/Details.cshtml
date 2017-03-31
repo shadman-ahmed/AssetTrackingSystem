@@ -40,7 +40,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GeneralCategoryId)
+            @Html.HiddenFor(model => model.GeneralCategoryId)
+            @Html.LabelFor(model => model.GeneralCategoryId, new { id = "GeneralCategory" })
         </dd>
 
     </dl>
@@ -49,3 +50,8 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Search")
 </p>
+
+@section JavaScript {
+
+    <script src="~/Scripts/AssetTracking/GeneralCategoryNameById.js"></script>
+}
