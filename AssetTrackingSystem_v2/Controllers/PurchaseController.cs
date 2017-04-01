@@ -27,6 +27,7 @@ namespace AssetTrackingSystem_v2.Controllers
         [HttpPost]
         public ActionResult Create(PurchaseCreateVM purchaseCreateVm)
         {
+            PartialMenuView("PurchaseEntry");
             return View();
         }
 
