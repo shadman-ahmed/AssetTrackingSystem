@@ -28,7 +28,11 @@ $(document).ready(function () {
         
    
 
-    $('#ShortName').keyup(function () {
+    /*$('#ShortName').keyup(function () {
+        var shortName = $('#ShortName').val();
+        $('#Code').val(OrganizationShortName + "_" + shortName);
+    });*/
+    $('#ShortName').bind('keyup change', function () {
         var shortName = $('#ShortName').val();
         $('#Code').val(OrganizationShortName + "_" + shortName);
     });
