@@ -39,4 +39,20 @@ $(document).ready(function () {
         });
     });
 
+    $('#ShortName').keyup(function () {
+        var organizationId = $('#OrganizationId').val();
+        var shortName = $('#ShortName').val();
+
+        var jsonData = { id: organizationId };
+        $.ajax({
+            url: '/Loader/GetOrganizationById?id=' + organizationId,
+            contentType: 'application/json',
+            data: JSON.stringify(jsonData),
+            success: function (organization) {
+
+                $('#Code').val(organization.ShortName + "_" + shortName);
+            }
+            });
+    });
+
 });
